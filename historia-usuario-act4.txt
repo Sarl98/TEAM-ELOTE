@@ -1,0 +1,8 @@
+Como cliente quiero un software que genere un archivo de palabras ordenadas alfabeticamente.
+Para tener de forma ordenada todos los conjuntos en un solo documento de texto.
+
+Como cliente quiero un software que genere un archivo de palabras en minusculas.
+Para darle un formato estandarizado a los conjuntos de palabras.
+
+Como desarrollador quiero crear un backlog que pueda sea entendible y accesible para el usuario.
+Para poder verificar y validar los requerimientos del usuario.

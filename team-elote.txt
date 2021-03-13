@@ -1,2 +1,2 @@
-Tiempo total en crear el nuevo archivo consolidado: 7.057
-Tiempo de ejecucion total: 8.7311
+Tiempo total en crear el nuevo archivo consolidado: 0.002
+Tiempo de ejecucion total: 0.2488

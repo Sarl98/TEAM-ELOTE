@@ -11,6 +11,8 @@
 import time
 import os
 import re
+import nltk
+from nltk import word_tokenize
 
 # main se utiliza para arrancar el script y realiza todas las especificaciones según los requerimientos
 # params: 
@@ -27,22 +29,22 @@ import re
 # txt = Se utiliza para interactuar con el archivo de texto en donde se guardarán los resultados del script
 
 def main():
-    global content
     content = []
   # tmpexe utiliza la librería de time para crear la instancia de un cronometro
     tmpexe = time.time()
   # files utiliza la librería de os para localizar los archivos con los que se trabajara
     files = os.listdir("notags")
     fileholder = ""
-    totaltempfiles = 0 
+    totaltempfiles = 0
+    tokenizedFiles = ["notags_simple.html","notags_medium.html","notags_hard.html","notags_049.html"]
   # por cada archivo en files se va a iniciar un cronometro para medir cuanto tarda en abrirse el archivo que está actualmente
   # en la iteración además de medir cuanto tiempo tarda en crear un nuevo archivo con las palabras separadas y en orden. Una vez que el 
   # cronometro se detenga se va a guardar el nombre del archivo que se abrió y el tiempo que se tardó  crear el nuevo archivo. En una 
   # variable separada se van a sumar todos los tiempos calculados(cuanto tardo en crear todos los archivos) para obtener el 
   # tiempo total para crear todos los archivos.
     for filex in files:
+      if filex in tokenizedFiles:
         create_wordlist_file(filex)
-        
     
     tmpopen = time.time()
     finish()
@@ -81,22 +83,22 @@ def create_wordlist_file(filename):
     mylist = list(dict.fromkeys(arrayOfWords))
   # se ordena la lista
     mylist = sorted(mylist, key=str.lower)
+    mylistTokenized = []
 
   # se formatea cada palabra de la lista para que quede por renglon
-    global content
-
     try: 
         for word in mylist:
             if word:
-              content.append(word)
+              mylistTokenized = word_tokenize(word)
+        finish(mylistTokenized)
     except Exception as e:
         print(e)
-
-def finish():
-    global content
-    sortedlist = sorted(content)
+    for word in mylist:
+      print(word_tokenize(word))
+      
+def finish(mylistTokenized):
+    sortedlist = sorted(mylistTokenized)
     text = ""
-
     try:
         for word in sortedlist:
                 text += word.lower() + "\n"
