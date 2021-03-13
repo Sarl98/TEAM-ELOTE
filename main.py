@@ -84,21 +84,29 @@ def create_wordlist_file(filename):
   # se formatea cada palabra de la lista para que quede por renglon
     global content
     print(filename)
-    for word in mylist:
-        if word:
-          content.append(word)
+
+    try: 
+        for word in mylist:
+            if word:
+              content.append(word)
+    except Exception as e:
+        print(e)
 
 def finish():
     global content
     sortedlist = sorted(content)
     text = ""
-    for word in sortedlist:
-            text += word.lower() + "\n"
-    wordlist = open("wordlists/wordlist_","w")
-    wordlist.truncate(0)
-    wordlist.write(text)
-    wordlist.close()
-    print("done")
+
+    try:
+        for word in sortedlist:
+                text += word.lower() + "\n"
+        wordlist = open("wordlists/wordlist_","w")
+        wordlist.truncate(0)
+        wordlist.write(text)
+        wordlist.close()
+        print("done")
+    except Exception as e:
+        print(e)
     
 if __name__ == "__main__":
     main() 
