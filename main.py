@@ -41,18 +41,19 @@ def main():
   # variable separada se van a sumar todos los tiempos calculados(cuanto tardo en crear todos los archivos) para obtener el 
   # tiempo total para crear todos los archivos.
     for filex in files:
-        tmpopen = time.time()
         create_wordlist_file(filex)
-        tmpclose = time.time()    
-        filetime = round(tmpclose - tmpopen,4)
-        fileholder += filex + " tiempo: " + str(filetime) + "\n"
-        totaltempfiles += filetime
+        
     
+    tmpopen = time.time()
     finish()
+    tmpclose = time.time()
+    filetime = round(tmpclose - tmpopen,4)
+    totaltempfiles += filetime
+
   # tmpexe2 detiene el cronometro que mide el tiempo de ejecución total
     tmpexe2 = time.time()
   # se obtiene el tiempo total para crear el nuevo archivo
-    fileholder += "Tiempo total en crear el nuevo archivo: " + str(round(totaltempfiles,4)) + "\n"
+    fileholder += "Tiempo total en crear el nuevo archivo consolidado: " + str(round(totaltempfiles,4)) + "\n"
   # se obtiene el tiempo de ejecución total
     fileholder += "Tiempo de ejecucion total: " + str(round(tmpexe2 - tmpexe,4))
   # se abre el archivo de texto en modo Append
@@ -83,7 +84,6 @@ def create_wordlist_file(filename):
 
   # se formatea cada palabra de la lista para que quede por renglon
     global content
-    print(filename)
 
     try: 
         for word in mylist:
