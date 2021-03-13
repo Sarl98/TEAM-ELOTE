@@ -27,6 +27,8 @@ import re
 # txt = Se utiliza para interactuar con el archivo de texto en donde se guardarán los resultados del script
 
 def main():
+    global content
+    content = []
   # tmpexe utiliza la librería de time para crear la instancia de un cronometro
     tmpexe = time.time()
   # files utiliza la librería de os para localizar los archivos con los que se trabajara
@@ -45,6 +47,8 @@ def main():
         filetime = round(tmpclose - tmpopen,4)
         fileholder += filex + " tiempo: " + str(filetime) + "\n"
         totaltempfiles += filetime
+    
+    finish()
   # tmpexe2 detiene el cronometro que mide el tiempo de ejecución total
     tmpexe2 = time.time()
   # se obtiene el tiempo total para crear el nuevo archivo
@@ -78,16 +82,24 @@ def create_wordlist_file(filename):
     mylist = sorted(mylist, key=str.lower)
 
   # se formatea cada palabra de la lista para que quede por renglon
-    content = ""
+    global content
+    print(filename)
     for word in mylist:
-        content += word + "\n"
-  # abre el archivo actual en la carpeta wordlist
-    wordlist = open("wordlists/wordlist_"+filename,"w")
-    wordlist.truncate(0)
-  # escribe el texto sin tags en el archivo actual de la carpeta wordlist
-    wordlist.write(content)
-    wordlist.close()
+        if word:
+          content.append(word)
 
+def finish():
+    global content
+    sortedlist = sorted(content)
+    text = ""
+    for word in sortedlist:
+            text += word.lower() + "\n"
+    wordlist = open("wordlists/wordlist_","w")
+    wordlist.truncate(0)
+    wordlist.write(text)
+    wordlist.close()
+    print("done")
+    
 if __name__ == "__main__":
     main() 
 
