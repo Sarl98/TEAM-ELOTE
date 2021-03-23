@@ -42,6 +42,8 @@ def main():
     for filex in files:
       if filex in tokenizedFiles:
         create_wordlist_file(filex, allTokenizedWords)
+        time_count = time.time()
+        create_time_count(filex, time_count)
 
     for word in allTokenizedWords:
       if word in allTokenizedWordsCount:
@@ -96,6 +98,16 @@ def create_wordlist_file(filename, allTokenizedWords):
               mylistTokenized.extend(word_tokenize(word.lower()))
         finish(mylistTokenized, filename)
         allTokenizedWords.extend(mylistTokenized)
+    except Exception as e:
+        print(e)
+
+#Cuenta el tiempo que toma analizar cada archivo y lo guarda en un archivo .txt
+def create_time_count(filename, time):
+    try: 
+      txt = open("timecount.txt", "a")
+      txt.truncate(0)
+      txt.write(filename + " took: " + str(time))
+      txt.close()
     except Exception as e:
         print(e)
       
