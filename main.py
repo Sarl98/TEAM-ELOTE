@@ -104,7 +104,7 @@ def create_wordlist_file(filename, allTokenizedWords):
 #Cuenta el tiempo que toma analizar cada archivo y lo guarda en un archivo .txt
 def create_time_count(filename, time):
     try: 
-      txt = open("timecount.txt", "a")
+      txt = open("a6_matricula.txt", "a")
       txt.truncate(0)
       txt.write(filename + " took: " + str(time))
       txt.close()
