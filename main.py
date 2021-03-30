@@ -11,6 +11,7 @@
 import time
 import os
 import re
+from typing import Dict
 import nltk
 from nltk import word_tokenize
 
@@ -31,8 +32,13 @@ def main():
     files = os.listdir("notags")
     totaltempfiles = 0
     tokenizedFiles = ["notags_simple.html","notags_medium.html","notags_hard.html","notags_049.html"]
+    
     allTokenizedWords =[]
     allTokenizedWordsCount = {}
+
+  # Variables para contar en cuántos archivos aparece la misma palabra.
+    allTokenizedWordsPerFile = []
+    allTokenizedWordsCountPerFile = {}
   # por cada archivo en files se va a iniciar un cronometro para medir cuanto tarda en abrirse el archivo que está actualmente
   # en la iteración además de medir cuanto tiempo tarda en crear un nuevo archivo con las palabras separadas y en orden. Una vez que el 
   # cronometro se detenga se va a guardar el nombre del archivo que se abrió y el tiempo que se tardó  crear el nuevo archivo. En una 
@@ -42,26 +48,56 @@ def main():
     timeCountString = ""
     for filex in files:
       if filex in tokenizedFiles:
-        create_wordlist_file(filex, allTokenizedWords)
+        create_wordlist_file(filex, allTokenizedWords, allTokenizedWordsPerFile)
         time_count = time.time()
         timeCountString += (filex + " took: " + str(time_count) + "\n")
     create_time_count(timeCountString)
         
-
+  # Cuenta cuántas veces aparece la palabra en general.
     for word in allTokenizedWords:
       if word in allTokenizedWordsCount:
         allTokenizedWordsCount[word] +=1
       else:
         allTokenizedWordsCount[word] = 1
-    for word in files:
-      if word in allTokenizedWordsCount:
-        allTokenizedWordsCount[word] +=1
+
+  # Split de los nombres de los archivos para contar en cuantos archivos aparece cada palabra.
+    for tokenizedWord in allTokenizedWordsPerFile:
+    # Hacemos split.
+      word = tokenizedWord.split(".-.")
+      word = word[0]
+
+    # Si existe la palabra en el diccionario le suma.
+      if word in allTokenizedWordsCountPerFile:
+        allTokenizedWordsCountPerFile[word] += 1
+    # Si no existe la palabra en el diccionario la agrega.
       else:
-        allTokenizedWordsCount[word] = 1
+        allTokenizedWordsCountPerFile[word] = 1
+
+  # Variable que sirve para juntar la cantidad de veces que aparece la palabra
+  # y en cuántos archivos aparece.
+    fullWordList = {}
+
+    dictIdent = 0
+    dictKeys = ["word", "countGeneral", "countPerFile"]
+
+    for tokenizedWord in allTokenizedWordsPerFile:
+    # Hacemos split.
+      word = tokenizedWord.split(".-.")
+      word = word[0]
+      
+      fullWordList[dictIdent] = {}
+
+      fullWordList[dictIdent][dictKeys[0]] = word
+      fullWordList[dictIdent][dictKeys[1]] = str(allTokenizedWordsCount[word])
+      fullWordList[dictIdent][dictKeys[2]] = allTokenizedWordsCountPerFile[word]
+
+      dictIdent += 1
+  
     wordHold = ""
+
   # se escriben los datos obtenidos en este script en el archivo de texto
-    for word in allTokenizedWordsCount:
-      wordHold += word + " | " + str(allTokenizedWordsCount[word])
+    for i in fullWordList:
+      wordHold += fullWordList[i][dictKeys[0]] + " | " + str(fullWordList[i][dictKeys[1]]) + " | " + str(fullWordList[i][dictKeys[2]])
       wordHold += "\n"
 
     tmpclose = time.time()
@@ -84,7 +120,7 @@ def main():
 # wordlist = abre el archivo en la carpeta wordlists
 
 # remove_html_tags(String)
-def create_wordlist_file(filename, allTokenizedWords):
+def create_wordlist_file(filename, allTokenizedWords, allTokenizedWordsPerFile):
   # abre y lee el archivo  (el archivo actual en la iteración)
     openedFile = open('notags/'+filename, 'r').read()
   # separa las palabras y simbolos del archivo en una lista
@@ -98,9 +134,12 @@ def create_wordlist_file(filename, allTokenizedWords):
     try: 
         for word in mylist:
             if word:
+            # Lo agrega a la lista de cuenta de palabras en general.
               mylistTokenized.extend(word_tokenize(word.lower()))
-        finish(mylistTokenized, filename)
+
+        finish(mylistTokenized, filename, allTokenizedWordsPerFile)
         allTokenizedWords.extend(mylistTokenized)
+
     except Exception as e:
         print(e)
 
@@ -114,12 +153,22 @@ def create_time_count(timeCount):
     except Exception as e:
         print(e)
       
-def finish(mylistTokenized, filename):
+def finish(mylistTokenized, filename, allTokenizedWordsPerFile):
     sortedlist = sorted(mylistTokenized)
     text = ""
+
     try:
         for word in sortedlist:
-                text += word + "\n"
+        # Concatena la palabra con el nombre del archivo...
+          concatenatedWord = word + ".-." + filename
+
+        # Si no existe esa palabra en nuestra lista...
+          if concatenatedWord not in allTokenizedWordsPerFile:
+          # Lo agregamos a la lista.
+            allTokenizedWordsPerFile.append(concatenatedWord)
+          
+          text += word + "\n"
+
         wordlist = open("wordlists/"+ filename, "w")
         wordlist.truncate(0)
         wordlist.write(text)
