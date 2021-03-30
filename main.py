@@ -39,11 +39,14 @@ def main():
   # variable separada se van a sumar todos los tiempos calculados(cuanto tardo en crear todos los archivos) para obtener el 
   # tiempo total para crear todos los archivos.
     tmpopen = time.time()
+    timeCountString = ""
     for filex in files:
       if filex in tokenizedFiles:
         create_wordlist_file(filex, allTokenizedWords)
         time_count = time.time()
-        create_time_count(filex, time_count)
+        timeCountString += (filex + " took: " + str(time_count) + "\n")
+    create_time_count(timeCountString)
+        
 
     for word in allTokenizedWords:
       if word in allTokenizedWordsCount:
@@ -102,11 +105,11 @@ def create_wordlist_file(filename, allTokenizedWords):
         print(e)
 
 #Cuenta el tiempo que toma analizar cada archivo y lo guarda en un archivo .txt
-def create_time_count(filename, time):
+def create_time_count(timeCount):
     try: 
       txt = open("a6_matricula.txt", "a")
       txt.truncate(0)
-      txt.write(filename + " took: " + str(time))
+      txt.write(timeCount)
       txt.close()
     except Exception as e:
         print(e)
