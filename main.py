@@ -46,11 +46,13 @@ def main():
   # tiempo total para crear todos los archivos.
     tmpopen = time.time()
     timeCountString = ""
+
     for filex in files:
       if filex in tokenizedFiles:
+        fileTimeOpen = time.time()
         create_wordlist_file(filex, allTokenizedWords, allTokenizedWordsPerFile)
-        time_count = time.time()
-        timeCountString += (filex + " took: " + str(time_count) + "\n")
+        fileTimeClose = time.time()
+        timeCountString += (filex + " took: " + str(round(fileTimeClose - fileTimeOpen, 4)) + "\n")
     create_time_count(timeCountString)
         
   # Cuenta cuántas veces aparece la palabra en general.

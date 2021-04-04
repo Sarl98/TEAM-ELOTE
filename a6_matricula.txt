@@ -1,4 +1,4 @@
-notags_hard.html took: 1617064818.5121589
-notags_049.html took: 1617064818.610322
-notags_medium.html took: 1617064818.634068
-notags_simple.html took: 1617064818.6480262
+notags_049.html took: 0.019
+notags_hard.html took: 0.002
+notags_medium.html took: 0.004
+notags_simple.html took: 0.002

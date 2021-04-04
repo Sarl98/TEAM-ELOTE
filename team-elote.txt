@@ -1,721 +1,266 @@
-designed | 2
-file | 3
-gauch | 2
-, | 8
-handle | 1
-has | 3
-home | 2
-how | 1
-html | 1
-in | 5
-information | 1
-is | 4
-it | 3
-. | 21
-page | 3
-ph.d | 1
-retrieval | 1
-see | 1
-some | 3
-susan | 1
-tags | 1
-text | 3
-the | 5
-this | 4
-to | 4
-you | 3
-$ | 5
-1.00 | 1
-10.00 | 1
-3.00 | 1
-40 | 1
-6.00 | 1
-( | 3
-coffee | 1
-of | 3
-- | 1
-1000 | 1
-4 | 1
-= | 1
-) | 4
-a | 4
-about | 1
-aditional | 1
-agreement | 1
-am | 1
-and | 1
-any | 1
-are | 3
-area | 1
-associated | 1
-atlas | 1
-available | 1
-: | 3
-back | 1
-be | 1
-being | 1
-burger | 1
-cafe | 1
-can | 1
-card | 1
-cards | 1
-comments | 1
-company | 1
-conspiracy | 1
-contacts | 1
-cost | 1
-cups | 2
-d'aubaine | 1
-disclaimer | 1
-... | 1
-i | 3
-dr | 1
-each | 1
-edge | 1
-faces | 1
-facing | 1
-first | 1
-for | 2
-games | 1
-get | 1
-graphics | 1
-guy | 1
-hand | 1
-have | 1
-hold | 1
-idea | 1
-? | 1
-if | 2
-image | 1
-images | 2
-imprinting | 1
-just | 1
-koanhead | 1
-larry | 1
-left | 1
-licensing | 1
-like | 1
-links | 1
-made | 1
-march | 1
-means | 1
-message | 1
-monique | 1
-mug | 1
-mugs | 4
-! | 1
-my | 3
-mystic | 1
-mysticoz | 2
-@ | 4
-aol.com | 1
-csinet.net | 1
-name | 2
-nice | 1
-not | 1
-now | 1
-nussbaum | 1
-oit | 1
-on | 2
-only | 1
-onte | 1
-ordered | 1
-own | 1
-owner | 1
-palace | 1
-patch | 1
-place | 1
-please | 1
-price | 1
-print | 1
-printed | 1
-produced | 1
-pumpkin | 1
-quick | 1
-rain | 1
-reproduce | 1
-resource | 1
-right | 1
-run | 1
-runs | 1
-send | 1
-shipping | 2
-soooo | 1
-these | 1
-until | 1
-up | 1
-all | 3
-walrus | 2
-way | 1
-we | 1
-web | 1
-which | 1
-who | 1
-whole | 1
-with | 1
-work | 1
-would | 1
-your | 1
-& | 1
-lt | 1
-; | 1
-maybe | 1
-1,500,472 | 1
-123-456-7890 | 1
-20 | 1
-20.07 | 1
-2007 | 1
-another | 1
-big | 1
-chemical | 1
-cincinnati | 1
-compound | 1
-cout | 1
-csce | 1
-department | 1
-dime | 1
-elephants | 1
-gold | 1
-grams | 1
-h20 | 1
-http | 1
-//www.csce.uark.edu/~sgauch | 1
-it.sentences | 1
-jgauch | 1
-gmail.com | 1
-joined | 1
-live | 1
-nickel | 1
-penny | 1
-people | 1
-punctuation | 1
-quarter | 1
-ring | 1
-sgauch | 1
-uark.edu | 1
-test | 2
-then | 1
-there | 1
-tricky | 1
-were | 1
-x | 1
-content | 2
-contents | 1
-english | 1
-interesting | 1
-last | 1
-much | 1
-nothing | 1
-or | 1
-rare | 1
-simple | 1
-that | 1
-very | 1
-notags_325.html | 1
-notags_260.html | 1
-notags_149.html | 1
-notags_372.html | 1
-notags_237.html | 1
-notags_364.html | 1
-notags_221.html | 1
-notags_108.html | 1
-notags_299.html | 1
-notags_333.html | 1
-notags_276.html | 1
-notags_348.html | 1
-notags_061.html | 1
-notags_431.html | 1
-notags_124.html | 1
-notags_466.html | 1
-notags_036.html | 1
-notags_173.html | 1
-notags_489.html | 1
-notags_309.html | 1
-notags_020.html | 1
-notags_470.html | 1
-notags_165.html | 1
-notags_427.html | 1
-notags_077.html | 1
-notags_098.html | 1
-notags_132.html | 1
-notags_145.html | 1
-notags_450.html | 1
-notags_283.html | 1
-notags_329.html | 1
-notags_112.html | 1
-notags_407.html | 1
-notags_057.html | 1
-notags_391.html | 1
-notags_104.html | 1
-notags_041.html | 1
-notags_411.html | 1
-notags_368.html | 1
-notags_387.html | 1
-notags_503.html | 1
-notags_153.html | 1
-notags_446.html | 1
-notags_016.html | 1
-notags_295.html | 1
-notags_082.html | 1
-notags_128.html | 1
-notags_201.html | 1
-notags_344.html | 1
-notags_190.html | 1
-notags_485.html | 1
-notags_256.html | 1
-notags_313.html | 1
-notags_186.html | 1
-notags_169.html | 1
-notags_493.html | 1
-notags_240.html | 1
-notags_305.html | 1
-notags_094.html | 1
-notags_217.html | 1
-notags_352.html | 1
-notags_216.html | 1
-notags_353.html | 1
-notags_095.html | 1
-notags_241.html | 1
-notags_304.html | 1
-notags_187.html | 1
-notags_168.html | 1
-notags_492.html | 1
-notags_257.html | 1
-notags_312.html | 1
-notags_191.html | 1
-notags_484.html | 1
-notags_200.html | 1
-notags_345.html | 1
-notags_083.html | 1
-notags_129.html | 1
-notags_294.html | 1
-notags_502.html | 1
-notags_152.html | 1
-notags_447.html | 1
-notags_017.html | 1
-notags_369.html | 1
-notags_386.html | 1
-notags_105.html | 1
-notags_040.html | 1
-notags_410.html | 1
-notags_390.html | 1
-notags_113.html | 1
-notags_406.html | 1
-notags_056.html | 1
-notags_282.html | 1
-notags_328.html | 1
-notags_144.html | 1
-notags_451.html | 1
-notags_426.html | 1
-notags_076.html | 1
-notags_099.html | 1
-notags_133.html | 1
-notags_021.html | 1
-notags_471.html | 1
-notags_164.html | 1
-notags_308.html | 1
-notags_467.html | 1
-notags_037.html | 1
-notags_172.html | 1
-notags_488.html | 1
-notags_060.html | 1
-notags_430.html | 1
-notags_125.html | 1
-notags_349.html | 1
-notags_298.html | 1
-notags_332.html | 1
-notags_277.html | 1
-notags_109.html | 1
-notags_365.html | 1
-notags_220.html | 1
-notags_373.html | 1
-notags_236.html | 1
-notags_148.html | 1
-notags_324.html | 1
-notags_261.html | 1
-notags_143.html | 1
-notags_006.html | 1
-notags_456.html | 1
-notags_285.html | 1
-notags_114.html | 1
-notags_401.html | 1
-notags_051.html | 1
-notags_378.html | 1
-notags_397.html | 1
-notags_102.html | 1
-notags_047.html | 1
-notags_417.html | 1
-notags_381.html | 1
-notags_155.html | 1
-notags_440.html | 1
-notags_010.html | 1
-notags_339.html | 1
-notags_293.html | 1
-notags_084.html | 1
-notags_207.html | 1
-notags_342.html | 1
-notags_196.html | 1
-notags_179.html | 1
-notags_483.html | 1
-notags_250.html | 1
-notags_315.html | 1
-notags_180.html | 1
-notags_495.html | 1
-notags_246.html | 1
-notags_303.html | 1
-notags_138.html | 1
-notags_092.html | 1
-notags_211.html | 1
-notags_354.html | 1
-notags_323.html | 1
-notags_289.html | 1
-notags_266.html | 1
-notags_374.html | 1
-notags_231.html | 1
-notags_118.html | 1
-notags_362.html | 1
-notags_227.html | 1
-notags_335.html | 1
-notags_270.html | 1
-notags_159.html | 1
-notags_067.html | 1
-notags_437.html | 1
-notags_122.html | 1
-notags_088.html | 1
-notags_319.html | 1
-notags_460.html | 1
-notags_030.html | 1
-notags_175.html | 1
-notags_026.html | 1
-notags_476.html | 1
-notags_163.html | 1
-notags_499.html | 1
-notags_358.html | 1
-notags_421.html | 1
-notags_071.html | 1
-notags_134.html | 1
-notags_420.html | 1
-notags_070.html | 1
-notags_135.html | 1
-notags_359.html | 1
-notags_027.html | 1
-notags_477.html | 1
-notags_162.html | 1
-notags_498.html | 1
-notags_461.html | 1
-notags_031.html | 1
-notags_174.html | 1
-notags_318.html | 1
-notags_066.html | 1
-notags_436.html | 1
-notags_123.html | 1
-notags_089.html | 1
-notags_158.html | 1
-notags_334.html | 1
-notags_271.html | 1
-notags_363.html | 1
-notags_226.html | 1
-notags_119.html | 1
-notags_375.html | 1
-notags_230.html | 1
-notags_322.html | 1
-notags_288.html | 1
-notags_267.html | 1
-notags_210.html | 1
-notags_355.html | 1
-notags_139.html | 1
-notags_093.html | 1
-notags_247.html | 1
-notags_302.html | 1
-notags_181.html | 1
-notags_494.html | 1
-notags_251.html | 1
-notags_314.html | 1
-notags_197.html | 1
-notags_178.html | 1
-notags_482.html | 1
-notags_206.html | 1
-notags_343.html | 1
-notags_085.html | 1
-notags_338.html | 1
-notags_292.html | 1
-notags_154.html | 1
-notags_441.html | 1
-notags_011.html | 1
-notags_380.html | 1
-notags_hard.html | 1
-notags_103.html | 1
-notags_046.html | 1
-notags_416.html | 1
-notags_379.html | 1
-notags_396.html | 1
-notags_115.html | 1
-notags_400.html | 1
-notags_050.html | 1
-notags_284.html | 1
-notags_142.html | 1
-notags_007.html | 1
-notags_457.html | 1
-notags_356.html | 1
-notags_213.html | 1
-notags_090.html | 1
-notags_301.html | 1
-notags_244.html | 1
-notags_497.html | 1
-notags_478.html | 1
-notags_182.html | 1
-notags_028.html | 1
-notags_317.html | 1
-notags_252.html | 1
-notags_481.html | 1
-notags_194.html | 1
-notags_340.html | 1
-notags_205.html | 1
-notags_086.html | 1
-notags_439.html | 1
-notags_069.html | 1
-notags_291.html | 1
-notags_442.html | 1
-notags_012.html | 1
-notags_157.html | 1
-notags_383.html | 1
-notags_229.html | 1
-notags_045.html | 1
-notags_415.html | 1
-notags_100.html | 1
-notags_395.html | 1
-notags_403.html | 1
-notags_053.html | 1
-notags_116.html | 1
-notags_268.html | 1
-notags_287.html | 1
-notags_004.html | 1
-notags_454.html | 1
-notags_141.html | 1
-notags_136.html | 1
-notags_423.html | 1
-notags_073.html | 1
-notags_161.html | 1
-notags_024.html | 1
-notags_474.html | 1
-notags_248.html | 1
-notags_177.html | 1
-notags_462.html | 1
-notags_198.html | 1
-notags_032.html | 1
-notags_120.html | 1
-notags_065.html | 1
-notags_435.html | 1
-notags_209.html | 1
-notags_272.html | 1
-notags_337.html | 1
-notags_419.html | 1
-notags_049.html | 1
-notags_225.html | 1
-notags_360.html | 1
-notags_399.html | 1
-notags_233.html | 1
-notags_376.html | 1
-notags_458.html | 1
-notags_008.html | 1
-notags_264.html | 1
-notags_321.html | 1
-notags_265.html | 1
-notags_320.html | 1
-notags_459.html | 1
-notags_009.html | 1
-notags_398.html | 1
-notags_232.html | 1
-notags_377.html | 1
-notags_medium.html | 1
-notags_224.html | 1
-notags_361.html | 1
-notags_418.html | 1
-notags_048.html | 1
-notags_273.html | 1
-notags_336.html | 1
-notags_208.html | 1
-notags_121.html | 1
-notags_064.html | 1
-notags_434.html | 1
-notags_176.html | 1
-notags_463.html | 1
-notags_199.html | 1
-notags_033.html | 1
-notags_249.html | 1
-notags_160.html | 1
-notags_025.html | 1
-notags_475.html | 1
-notags_137.html | 1
-notags_422.html | 1
-notags_072.html | 1
-notags_005.html | 1
-notags_455.html | 1
-notags_140.html | 1
-notags_269.html | 1
-notags_286.html | 1
-notags_402.html | 1
-notags_052.html | 1
-notags_117.html | 1
-notags_394.html | 1
-notags_044.html | 1
-notags_414.html | 1
-notags_101.html | 1
-notags_382.html | 1
-notags_228.html | 1
-notags_443.html | 1
-notags_013.html | 1
-notags_156.html | 1
-notags_290.html | 1
-notags_087.html | 1
-notags_438.html | 1
-notags_068.html | 1
-notags_341.html | 1
-notags_204.html | 1
-notags_480.html | 1
-notags_195.html | 1
-notags_316.html | 1
-notags_253.html | 1
-notags_496.html | 1
-notags_479.html | 1
-notags_183.html | 1
-notags_029.html | 1
-notags_300.html | 1
-notags_245.html | 1
-notags_091.html | 1
-notags_357.html | 1
-notags_212.html | 1
-notags_130.html | 1
-notags_425.html | 1
-notags_075.html | 1
-notags_219.html | 1
-notags_167.html | 1
-notags_022.html | 1
-notags_472.html | 1
-notags_188.html | 1
-notags_171.html | 1
-notags_464.html | 1
-notags_034.html | 1
-notags_258.html | 1
-notags_126.html | 1
-notags_063.html | 1
-notags_433.html | 1
-notags_018.html | 1
-notags_448.html | 1
-notags_274.html | 1
-notags_331.html | 1
-notags_223.html | 1
-notags_389.html | 1
-notags_366.html | 1
-notags_059.html | 1
-notags_409.html | 1
-notags_235.html | 1
-notags_370.html | 1
-notags_262.html | 1
-notags_327.html | 1
-notags_350.html | 1
-notags_215.html | 1
-notags_096.html | 1
-notags_079.html | 1
-notags_429.html | 1
-notags_307.html | 1
-notags_242.html | 1
-notags_491.html | 1
-notags_184.html | 1
-notags_311.html | 1
-notags_254.html | 1
-notags_487.html | 1
-notags_038.html | 1
-notags_468.html | 1
-notags_192.html | 1
-notags_346.html | 1
-notags_203.html | 1
-notags_080.html | 1
-notags_278.html | 1
-notags_297.html | 1
-notags_444.html | 1
-notags_014.html | 1
-notags_501.html | 1
-notags_151.html | 1
-notags_385.html | 1
-notags_043.html | 1
-notags_413.html | 1
-notags_106.html | 1
-notags_239.html | 1
-notags_393.html | 1
-notags_405.html | 1
-notags_055.html | 1
-notags_110.html | 1
-notags_281.html | 1
-notags_002.html | 1
-notags_452.html | 1
-notags_147.html | 1
-notags_003.html | 1
-notags_453.html | 1
-notags_146.html | 1
-notags_280.html | 1
-notags_404.html | 1
-notags_054.html | 1
-notags_111.html | 1
-notags_238.html | 1
-notags_392.html | 1
-notags_042.html | 1
-notags_412.html | 1
-notags_107.html | 1
-notags_384.html | 1
-notags_445.html | 1
-notags_015.html | 1
-notags_500.html | 1
-notags_150.html | 1
-notags_279.html | 1
-notags_296.html | 1
-notags_081.html | 1
-notags_347.html | 1
-notags_202.html | 1
-notags_486.html | 1
-notags_039.html | 1
-notags_469.html | 1
-notags_193.html | 1
-notags_310.html | 1
-notags_255.html | 1
-notags_490.html | 1
-notags_185.html | 1
-notags_306.html | 1
-notags_243.html | 1
-notags_097.html | 1
-notags_078.html | 1
-notags_428.html | 1
-notags_351.html | 1
-notags_214.html | 1
-notags_263.html | 1
-notags_326.html | 1
-notags_234.html | 1
-notags_371.html | 1
-notags_simple.html | 1
-notags_058.html | 1
-notags_408.html | 1
-notags_222.html | 1
-notags_388.html | 1
-notags_367.html | 1
-notags_275.html | 1
-notags_330.html | 1
-notags_019.html | 1
-notags_449.html | 1
-notags_127.html | 1
-notags_062.html | 1
-notags_432.html | 1
-notags_259.html | 1
-notags_170.html | 1
-notags_465.html | 1
-notags_035.html | 1
-notags_166.html | 1
-notags_023.html | 1
-notags_473.html | 1
-notags_189.html | 1
-notags_218.html | 1
-notags_131.html | 1
-notags_424.html | 1
-notags_074.html | 1
+! | 1 | 1
+$ | 5 | 1
+( | 3 | 2
+) | 4 | 2
+, | 8 | 4
+- | 1 | 1
+. | 21 | 4
+... | 1 | 1
+1.00 | 1 | 1
+10.00 | 1 | 1
+1000 | 1 | 1
+3.00 | 1 | 1
+4 | 1 | 1
+40 | 1 | 1
+6.00 | 1 | 1
+: | 3 | 2
+= | 1 | 1
+? | 1 | 1
+@ | 4 | 2
+a | 4 | 3
+about | 1 | 1
+aditional | 1 | 1
+agreement | 1 | 1
+all | 3 | 2
+am | 1 | 1
+and | 1 | 1
+any | 1 | 1
+aol.com | 1 | 1
+are | 3 | 3
+area | 1 | 1
+associated | 1 | 1
+atlas | 1 | 1
+available | 1 | 1
+back | 1 | 1
+be | 1 | 1
+being | 1 | 1
+burger | 1 | 1
+cafe | 1 | 1
+can | 1 | 1
+card | 1 | 1
+cards | 1 | 1
+coffee | 1 | 1
+comments | 1 | 1
+company | 1 | 1
+conspiracy | 1 | 1
+contacts | 1 | 1
+cost | 1 | 1
+csinet.net | 1 | 1
+cups | 2 | 1
+d'aubaine | 1 | 1
+disclaimer | 1 | 1
+dr | 1 | 1
+each | 1 | 1
+edge | 1 | 1
+faces | 1 | 1
+facing | 1 | 1
+first | 1 | 1
+for | 2 | 2
+games | 1 | 1
+get | 1 | 1
+graphics | 1 | 1
+guy | 1 | 1
+hand | 1 | 1
+have | 1 | 1
+hold | 1 | 1
+home | 2 | 2
+i | 3 | 2
+idea | 1 | 1
+if | 2 | 2
+image | 1 | 1
+images | 2 | 1
+imprinting | 1 | 1
+in | 5 | 4
+is | 4 | 4
+just | 1 | 1
+koanhead | 1 | 1
+larry | 1 | 1
+left | 1 | 1
+licensing | 1 | 1
+like | 1 | 1
+links | 1 | 1
+made | 1 | 1
+march | 1 | 1
+means | 1 | 1
+message | 1 | 1
+monique | 1 | 1
+mug | 1 | 1
+mugs | 4 | 1
+my | 3 | 2
+mystic | 1 | 1
+mysticoz | 2 | 1
+name | 2 | 2
+nice | 1 | 1
+not | 1 | 1
+now | 1 | 1
+nussbaum | 1 | 1
+of | 3 | 2
+oit | 1 | 1
+on | 2 | 1
+only | 1 | 1
+onte | 1 | 1
+ordered | 1 | 1
+own | 1 | 1
+owner | 1 | 1
+page | 3 | 2
+palace | 1 | 1
+patch | 1 | 1
+place | 1 | 1
+please | 1 | 1
+price | 1 | 1
+print | 1 | 1
+printed | 1 | 1
+produced | 1 | 1
+pumpkin | 1 | 1
+quick | 1 | 1
+rain | 1 | 1
+reproduce | 1 | 1
+resource | 1 | 1
+right | 1 | 1
+run | 1 | 1
+runs | 1 | 1
+send | 1 | 1
+shipping | 2 | 1
+soooo | 1 | 1
+the | 5 | 4
+these | 1 | 1
+this | 4 | 4
+to | 4 | 3
+until | 1 | 1
+up | 1 | 1
+walrus | 2 | 1
+way | 1 | 1
+we | 1 | 1
+web | 1 | 1
+which | 1 | 1
+who | 1 | 1
+whole | 1 | 1
+with | 1 | 1
+work | 1 | 1
+would | 1 | 1
+you | 3 | 2
+your | 1 | 1
+, | 8 | 4
+. | 21 | 4
+designed | 2 | 2
+file | 3 | 3
+gauch | 2 | 2
+handle | 1 | 1
+has | 3 | 3
+home | 2 | 2
+how | 1 | 1
+html | 1 | 1
+in | 5 | 4
+information | 1 | 1
+is | 4 | 4
+it | 3 | 2
+page | 3 | 2
+ph.d | 1 | 1
+retrieval | 1 | 1
+see | 1 | 1
+some | 3 | 3
+susan | 1 | 1
+tags | 1 | 1
+text | 3 | 3
+the | 5 | 4
+this | 4 | 4
+to | 4 | 3
+you | 3 | 2
+& | 1 | 1
+( | 3 | 2
+) | 4 | 2
+, | 8 | 4
+. | 21 | 4
+//www.csce.uark.edu/~sgauch | 1 | 1
+1,500,472 | 1 | 1
+123-456-7890 | 1 | 1
+20 | 1 | 1
+20.07 | 1 | 1
+2007 | 1 | 1
+: | 3 | 2
+; | 1 | 1
+@ | 4 | 2
+a | 4 | 3
+another | 1 | 1
+are | 3 | 3
+big | 1 | 1
+chemical | 1 | 1
+cincinnati | 1 | 1
+compound | 1 | 1
+cout | 1 | 1
+csce | 1 | 1
+department | 1 | 1
+designed | 2 | 2
+dime | 1 | 1
+elephants | 1 | 1
+file | 3 | 3
+for | 2 | 2
+gmail.com | 1 | 1
+gold | 1 | 1
+grams | 1 | 1
+h20 | 1 | 1
+has | 3 | 3
+http | 1 | 1
+i | 3 | 2
+if | 2 | 2
+in | 5 | 4
+is | 4 | 4
+it.sentences | 1 | 1
+jgauch | 1 | 1
+joined | 1 | 1
+live | 1 | 1
+lt | 1 | 1
+maybe | 1 | 1
+nickel | 1 | 1
+of | 3 | 2
+penny | 1 | 1
+people | 1 | 1
+punctuation | 1 | 1
+quarter | 1 | 1
+ring | 1 | 1
+sgauch | 1 | 1
+some | 3 | 3
+test | 2 | 2
+text | 3 | 3
+the | 5 | 4
+then | 1 | 1
+there | 1 | 1
+this | 4 | 4
+to | 4 | 3
+tricky | 1 | 1
+uark.edu | 1 | 1
+were | 1 | 1
+x | 1 | 1
+, | 8 | 4
+. | 21 | 4
+a | 4 | 3
+all | 3 | 2
+are | 3 | 3
+content | 2 | 1
+contents | 1 | 1
+english | 1 | 1
+file | 3 | 3
+gauch | 2 | 2
+has | 3 | 3
+in | 5 | 4
+interesting | 1 | 1
+is | 4 | 4
+it | 3 | 2
+last | 1 | 1
+much | 1 | 1
+my | 3 | 2
+name | 2 | 2
+nothing | 1 | 1
+or | 1 | 1
+rare | 1 | 1
+simple | 1 | 1
+some | 3 | 3
+test | 2 | 2
+text | 3 | 3
+that | 1 | 1
+the | 5 | 4
+this | 4 | 4
+very | 1 | 1
 
 
-Tiempo total de ejecucion: 0.1807
+Tiempo total de ejecucion: 0.029
