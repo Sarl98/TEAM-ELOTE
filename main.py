@@ -16,81 +16,51 @@ import nltk
 from nltk import word_tokenize
 
 # Empieza y ejecuta el programa.
-# Params: 
-# files = abre los archivos que se utilizarán.
 #
+# Variables locales: 
+# - files = abre los archivos que se utilizarán.
+# - allTokenizedWordsCountPerFile = Diccionario que contendrá las palabras, incluyendo la cantidad
+# 	de archivos en las que esta palabra aparece. También contendrá cuáles son los archivos en los 
+# 	que aparece y la frecuencia en las que aparece en ese archivo.
+# - tmpOpen = Inicia el timer.
+# - tmpClose = Cierra el timer.
+# - totalTimeCount = Mensaje del tiempo total del contador.
+#
+# main()
 def main():
 	# Abre la carpeta "notags" y devuelve nombre de todos los archivos que contiene.
 	files = os.listdir("notags")
-	allTokenizedWords = []
-	allTokenizedWordsCount = {}
-	allTokenizedWordsPerFile = []
 	allTokenizedWordsCountPerFile = {}
-	tmpopen = time.time()
+	tmpOpen = time.time()
 
 	# Si no existen los archivos de palabras tokenizadas en la carpeta "wordlists" los crea.
 	createFileIfDontExist(files)
-	getTokenizedLists(allTokenizedWords, allTokenizedWordsPerFile)
-	
-	for word in allTokenizedWords:
-		if word in allTokenizedWordsCount:
-			allTokenizedWordsCount[word] +=1
-		else:
-			allTokenizedWordsCount[word] = 1
+	# Genera el diccionario de las palabras tokenizadas.
+	getTokenizedLists(allTokenizedWordsCountPerFile)
+	# Crea el documento de posting.txt.
+	createPostingFile(allTokenizedWordsCountPerFile)
+	# Crea el documento de diccionario.txt.
+	createDictionaryFile(allTokenizedWordsCountPerFile)
 
-	for tokenizedWord in allTokenizedWordsPerFile:
-		word = tokenizedWord.split(".-.")
-		word = word[0]
+	tmpClose = time.time()
+	totalTimeCount = "\n\n Tiempo total de ejecución del programa: " + str(round(tmpClose - tmpOpen, 4))
 
-		if word in allTokenizedWordsCountPerFile:
-			allTokenizedWordsCountPerFile[word] += 1
-		else:
-			allTokenizedWordsCountPerFile[word] = 1
+	# Agrega el tiempo total de ejecución al archivo a7_matricula.txt.
+	createFile("a7_matricula.txt", totalTimeCount, False)
 
-	fullWordList = {}
-
-	dictIdent = 0
-	dictKeys = ["word", "countGeneral", "countPerFile"]
-
-	for tokenizedWord in allTokenizedWordsPerFile:
-		word = tokenizedWord.split(".-.")
-		word = word[0]
-		
-		fullWordList[dictIdent] = {}
-
-		fullWordList[dictIdent][dictKeys[0]] = word
-		fullWordList[dictIdent][dictKeys[1]] = str(allTokenizedWordsCount[word])
-		fullWordList[dictIdent][dictKeys[2]] = allTokenizedWordsCountPerFile[word]
-
-		dictIdent += 1
-
-	wordHold = ""
-
-	for i in fullWordList:
-		wordHold += fullWordList[i][dictKeys[0]] + " | " + str(fullWordList[i][dictKeys[1]]) + " | " + str(fullWordList[i][dictKeys[2]])
-		wordHold += "\n"
-
-	tmpclose = time.time()
-	filetime = round(tmpclose - tmpopen,4)
-	totaltempfiles = 0
-	totaltempfiles += filetime
-	wordHold += "\n" + "\n" + "Tiempo total de ejecucion: " + str(totaltempfiles)
-	txt = open("team-elote.txt", "a")
-	txt.truncate(0)
-	txt.write(wordHold)
-	txt.close()
-
-# createFileIfDontExist sirve para validar si el archivo existe en la carpeta "wordlists" y crear
-# los archivos necesarios si estos no existen. Toma el tiempo de creación de cada archivo.
+# createFileIfDontExist sirve para validar si el archivo existe en la carpeta "wordlists" 
+# y crear los archivos necesarios si estos no existen. Toma el tiempo de creación de
+# cada archivo.
 #
 # Parámetros:
 # - files = Lista de los archivos de "notags".
+#
 # Variables locales:
 # - fileTimeOpen = Inicio del contador.
 # - fileTimeClose = Fin del contador.
 # - timeCountString = String que contiene el tiempo de ejecución de todos los archivos que se crearon.
 #
-# createFileIfDontExist(list[string], list[string], list[string], string)
+# createFileIfDontExist(list[string])
 def createFileIfDontExist(files):
 	timeCountString = ""
 	
@@ -113,60 +83,161 @@ def createFileIfDontExist(files):
 			# Le asigna un tiempo de 0 segundos.
 			timeCountString += filex + " se tardo en generar: 0 segundos\n"
 
-	# Abre el archivo.
-	txt = open("a6_matricula.txt", "a")
-	# Vacía el archivo.
-	txt.truncate(0)
-	# Añade el string timeCountString al archivo.
-	txt.write(timeCountString)
-	# Lo cierra y guarda.
-	txt.close()
+	# Creamos el archivo de texto diccionario.txt.
+	createFile("tiempos-de-creacion-wordlists.txt", timeCountString, True)
 
-
-def getTokenizedLists(allTokenizedWords, allTokenizedWordsPerFile):
-	# Lista de todos los archivos en la carpeta "wordlists".
+# getTokenizedLists se encarga de leer los archivos de la carpeta "wordlists"
+# y crea un diccionario con las palabras y el número de archivos en las que 
+# aparecen. También obtiene cuáles son los archivos en los que aparece la palabra
+# y la frecuencia en la que esta aparece en ese archivo.
+#
+# Params:
+# - allTokenizedWordsCountPerFile = Diccionario donde se guardan las palabras
+#   y la cantidad de archivos en las que aparecen.
+#
+# Variables locales:
+# - sortedFiles = Lista de todos los archivos en la carpeta "wordlists".
+# - openedFile = Abre y lee el archivo actual.
+# - listOfWords = Lista que contiene las palabras tokenizadas del archivo.
+# - repeatedWords = Lista de las palabras que ya aparecieron en el archivo actual.
+# - timeLogContent = String que contiene los logs de tiempo de cada archivo.
+# - tmpOpen = Inicia el timer.
+# - tmpClose = Cierra el timer.
+# - timeLogContent = Mensaje del tiempo total del contador.
+#
+# getTokenizedLists(dict[string: int])
+def getTokenizedLists(allTokenizedWordsCountPerFile):
 	sortedFiles = os.listdir("wordlists")
+	timeLogContent = ""
 
 	# Por cada archivo...
 	for file in sortedFiles:
+		# Abrimos el contador de tiempo.
+		tmpOpen = time.time()
+
 		# Abre el archivo.
-		openedFile = open('wordlists/'+file, 'r').read()
+		openedFile = open('wordlists/' + file, 'r').read()
 		# Separa las palabras en el archivo.
-		arrayOfWords = re.split('\s+', openedFile)
-		# Se crea una lista con las palabras separadas.
-		myList = list(dict.fromkeys(arrayOfWords))
-		# Agrega la lista de palabras tokenizadas del archivo actual a la lista de
-		# todas las palabras tokenizadas de todos los archivos.
-		allTokenizedWords.extend(myList)
+		listOfWords = re.split('\s+', openedFile)
+		repeatedWords = []
 
 		# Por cada palabra en la lista myList...
-		for word in myList:
-			# Le concatena a la palabra el nombre del archivo en el que se encuentra.
-			concatenatedWord = word + ".-." + file
+		for word in listOfWords:
+			# Si la palabra no está en la lista de palabras repetidas Y
+			# no está en el diccionario de allTokenizedWordsCountPerFile...
+			if (word not in repeatedWords) and (word not in allTokenizedWordsCountPerFile):
+				allTokenizedWordsCountPerFile[word] = {}
+				# Se añade la palabra al diccionario con un valor inicial de 1.
+				allTokenizedWordsCountPerFile[word]["count"] = 1
+				# Inicializamos el diccionario de files.
+				allTokenizedWordsCountPerFile[word]["files"] = {}
+				# Inicializamos el contador de la palabra en el archivo con un
+				# valor inicial de 1.
+				allTokenizedWordsCountPerFile[word]["files"][file] = 1
 
-			# Si concatenedWord no está en la lista allTokenizedWordsPerFile...
-			if concatenatedWord not in allTokenizedWordsPerFile:
-				# Se añade a la lista.
-				allTokenizedWordsPerFile.append(concatenatedWord)
+				# Se añade la palabra a la lista de palabras repetidas.
+				repeatedWords.append(word)
+			# Si la palabra no está en la lista de palabras repetidas Y
+			# si está en el diccionario de allTokenizedWordsCountPerFile...
+			elif (word not in repeatedWords) and (word in allTokenizedWordsCountPerFile):
+				# Se le suma 1 a la cuenta.
+				allTokenizedWordsCountPerFile[word]["count"] += 1
+				# Se añade la palabra a la lista de palabras repetidas.
+				repeatedWords.append(word)
+			# Si la palabra se repite...
+			elif (word in repeatedWords):
+				# Si el archivo no está inicializado en el diccionario...
+				if file not in allTokenizedWordsCountPerFile[word]["files"]:
+					# Se inicializa con un valor inicial de 1.
+					allTokenizedWordsCountPerFile[word]["files"][file] = 1
+				# Si el archivo sí está inicializado en el diccionario...
+				else:
+					# Le sumamos uno a su contador de frecuencia.
+					allTokenizedWordsCountPerFile[word]["files"][file] += 1
+
+		# Cerramos el contador de tiempo.
+		tmpClose = time.time()
+		# Concatenamos el mensaje de tiempo del archivo.
+		timeLogContent += file + "   " + str(round(tmpClose - tmpOpen, 4)) + "\n"
+
+	# Creamos el archivo que registra el tiempo.
+	createFile("a7_matricula.txt", timeLogContent, True)
 			
+# createPostingFile se encarga de crear el archivo posting.
+#
+# Parámetros:
+# - allTokenizedWordsCountPerFile: Diccionario de palabras con su cantidad de
+#   archivos en los que aparece y el diccionario de archivos en los que esa
+#	palabra aparece y la cantidad de veces que aparece ahí.
+#
+# Variables locales:
+# - postingFileContent = String que forma el contenido del archivo posting.
+#
+# createPostingFile(list[dict[])
+def createPostingFile (allTokenizedWordsCountPerFile):
+	postingFileContent = ""
+
+	# Por cada palabra dentro del diccionario allTokenizedWordsCountPerFile...
+	for word in allTokenizedWordsCountPerFile:
+		# Por cada fileName dentro de el diccionario de archivos de esa palabra...
+		for fileName in allTokenizedWordsCountPerFile[word]["files"]:
+			# Formamos el string y se lo concatenamos a postingFileContent...
+			postingFileContent += fileName + " | " + str(allTokenizedWordsCountPerFile[word]["files"][fileName]) + "\n"
+
+	# Creamos el archivo de texto diccionario.txt.
+	createFile("posting.txt", postingFileContent, True)
+	
+# createDictionaryFile se encarga de crear el archivo diccionario.
+#
+# Parámetros:
+# - allTokenizedWordsCountPerFile = Diccionario de palabras con su cantidad de
+#   archivos en los que aparece y el diccionario de archivos en los que esa
+#	palabra aparece y la cantidad de veces que aparece ahí.
+#
+# Variables locales:
+# - dictionaryFileContent = String que forma el contenido del archivo diccionario.
+# - postingIndex = Contador del índice relativo a posting.
+#
+# createDictionaryFile(list[dict[])
+def createDictionaryFile (allTokenizedWordsCountPerFile):
+	dictionaryFileContent = ""
+	postingIndex = 0
+
+	# Por cada palabra en el diccionario de allTokenizedWordsCountPerFile...
+	for word in allTokenizedWordsCountPerFile:
+		# Concatenamos a dictionaryFileContent la cantidad de archivos en las
+		# que aparece y el índice relativo a posting.
+		dictionaryFileContent += "'" + word + "' | " + str(allTokenizedWordsCountPerFile[word]["count"]) + " | " + str(postingIndex) + "\n"
+
+		# Sumamos al contador de postingIndex la cantidad de archivos en las que
+		# aparece.
+		postingIndex += len(allTokenizedWordsCountPerFile[word]["files"])
+
+	# Creamos el archivo de texto diccionario.txt.
+	createFile("diccionario.txt", dictionaryFileContent, True)
 
 # createTokenizedList abre el archivo actual de la carpeta "notags" y crea una lista de
 # las palabras del archivo y las tokeniza.
 #
 # Parámetros:
 # - filename = Nombre del archivo actual.
-# - allTokenizedWords = Lista con todas las palabras tokenizadas de todos los archivos.
 #
-# createTokenizedList(string, list[string], list[string])
+# Variables locales:
+# - myListTokenized = Lista de las palabras tokenizadas de este archivo.
+# - openedFile = Abre y lee el archivo actual.
+# - listOfWords = Lista que contiene las palabras tokenizadas del archivo.
+# - myList = Lista que remueve los tokens repetidos.
+#
+# createTokenizedList(string)
 def createTokenizedList(filename):
 	myListTokenized = []
 	
 	# Abre el archivo.
 	openedFile = open('notags/'+filename, 'r').read()
 	# Separa las palabras en el archivo.
-	arrayOfWords = re.split('\s+', openedFile)
+	listOfWords = re.split('\s+', openedFile)
 	# Se crea una lista con las palabras separadas.
-	myList = list(dict.fromkeys(arrayOfWords))
+	myList = list(dict.fromkeys(listOfWords))
 
 	try:
 		# Por cada palabra en la lista myList...
@@ -183,23 +254,18 @@ def createTokenizedList(filename):
 
 	except Exception as e:
 		print(e)
-		
-
+	
 # createWordlistFile crea una lista de todas las tokens del archivo actual
-# y crea un nuevo archivo en la carpeta "wordlists" con estas token
+# y crea un nuevo archivo en la carpeta "wordlists" con estas token.
 # 
 # Parámetros:
 # - mylistTokenized = Lista con todas las palabras tokenizadas del archivo actual.
 # - filename = El nombre del archivo.
-# - allTokenizedWordsPerFile = Lista con las palabras tokenizadas concatenadas con
-#   el nombre del archivo actual.
 #
 # Variables locales:
 # - fullFileContentString = String con todas las palabras del archivo actual.
-# - concatenatedWord = String con el nombre de la palabra unido al nombre del archivo.
-# - wordlist = Archivo actual en la carpeta "wordlists".
 #
-# createWordlistFile(list[string], string, list[string])
+# createWordlistFile(list[string], string)
 def createWordlistFile(mylistTokenized, filename):
 	fullFileContentString = ""
 	
@@ -212,17 +278,36 @@ def createWordlistFile(mylistTokenized, filename):
 			# Le concatena la palabra a fullFileContentString y da un enter.
 			fullFileContentString += word + "\n"
 
-		# Abre el archivo en la carpeta de wordlists. Si este no existe, lo crea.
-		wordlist = open("wordlists/"+ filename, "w")
-		# Vacía el contenido del archivo.
-		wordlist.truncate(0)
-		# Añade el string fullFileContentString en el archivo.
-		wordlist.write(fullFileContentString)
-		# Lo cierra y lo guarda.
-		wordlist.close()
+		# Creamos el archivo de texto diccionario.txt.
+		createFile("wordlists/"+ filename, fullFileContentString, True)
 
 	except Exception as e:
 		print(e)
 
+# createFile crea el archivo y lo guarda con el nombre y contenido dado.
+#
+# Parámetros:
+# - fileName = Nombre del archivo.
+# - fileContent = Contenido del archivo.
+# - willTruncate = Determina si se borrará el contenido del archivo antes
+#   de escribir sobre él.
+#
+# Variables locales:
+# - txt = Abre el archivo y lo guarda.
+#
+# createFile(string, string, bool)
+def createFile(fileName, fileContent, willTruncate):
+	# Abre el archivo.
+	txt = open(fileName, "a")
+
+	if willTruncate:
+		# Vacía el archivo.
+		txt.truncate(0)
+		
+	# Añade el string postingFileContent al archivo.
+	txt.write(fileContent)
+	# Lo cierra y guarda.
+	txt.close()
+
 if __name__ == "__main__":
-  main() 
+  main()
