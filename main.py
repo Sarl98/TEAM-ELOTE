@@ -6,7 +6,7 @@
 # Germán Marcelo Celestino Chávez 2866129
 # Saúl Antonio Rivera Luna 2729947
 
-# Actividad 7
+# Actividad 8
 
 import time
 import os
@@ -46,7 +46,7 @@ def main():
 	totalTimeCount = "\n\n Tiempo total de ejecución del programa: " + str(round(tmpClose - tmpOpen, 4))
 
 	# Agrega el tiempo total de ejecución al archivo a7_matricula.txt.
-	createFile("a7_matricula.txt", totalTimeCount, False)
+	createFile("a8_matricula.txt", totalTimeCount, False)
 
 # createFileIfDontExist sirve para validar si el archivo existe en la carpeta "wordlists" 
 # y crear los archivos necesarios si estos no existen. Toma el tiempo de creación de
@@ -116,7 +116,7 @@ def getTokenizedLists(allTokenizedWordsCountPerFile):
 		tmpOpen = time.time()
 
 		# Abre el archivo.
-		openedFile = open('wordlists/' + file, 'r').read()
+		openedFile = open('wordlists/' + file, 'r', encoding='windows-1252').read()
 		# Separa las palabras en el archivo.
 		listOfWords = re.split('\s+', openedFile)
 		repeatedWords = []
@@ -197,24 +197,48 @@ def createPostingFile (allTokenizedWordsCountPerFile):
 # Variables locales:
 # - dictionaryFileContent = String que forma el contenido del archivo diccionario.
 # - postingIndex = Contador del índice relativo a posting.
+# - hashtable = Diccionario(Estructura Python) que almacena los datos de cada palabra
+#   en una estructura similar al HashTable.
 #
 # createDictionaryFile(list[dict[])
 def createDictionaryFile (allTokenizedWordsCountPerFile):
 	dictionaryFileContent = ""
 	postingIndex = 0
+	hashtable = {}
 
 	# Por cada palabra en el diccionario de allTokenizedWordsCountPerFile...
 	for word in allTokenizedWordsCountPerFile:
-		# Concatenamos a dictionaryFileContent la cantidad de archivos en las
-		# que aparece y el índice relativo a posting.
-		dictionaryFileContent += "'" + word + "' | " + str(allTokenizedWordsCountPerFile[word]["count"]) + " | " + str(postingIndex) + "\n"
-
+		# Verificamos si la palabra puede ser codificada en codigo ascii para añadirla a
+		# la hashtable, si no lo es agregamos un 0 y -1.
+		if is_ascii(word):
+			# Concatenamos a dictionaryFileContent la cantidad de archivos en las
+			# que aparece y el índice relativo a posting.
+			dictionaryFileContent += "'" + word + "' | " + str(allTokenizedWordsCountPerFile[word]["count"]) + " | " + str(postingIndex) + "\n"
+			# Agregamos cada iteracion a la hashtable, la key sera la palabra y el count e indice posting
+			# seran el valor.
+			hashtable[word] = [allTokenizedWordsCountPerFile[word]["count"],postingIndex]
+		else:
+			dictionaryFileContent += "    " + "|    0|    -1"+ "\n"
+		# Guardamos los datos en una estructura HashTable para acceder a ellos mediante una key.
 		# Sumamos al contador de postingIndex la cantidad de archivos en las que
 		# aparece.
 		postingIndex += len(allTokenizedWordsCountPerFile[word]["files"])
 
+	# Hacemos un encode ascii a nuestro diccionario.
+
 	# Creamos el archivo de texto diccionario.txt.
 	createFile("diccionario.txt", dictionaryFileContent, True)
+
+# is_ascii sirve para corrobarar si una cadena o caracter puede ser encoded en ascii.
+#
+# Parametros:
+# -text = Cadena de texto a revisar.
+#
+def is_ascii(text):
+	# Primero descomponemos la cadena de texto mediante un for.
+	# Despues usamos la funcion ord que regresa un integer representando el caracter Unicode para
+	# verificar si es ascii.
+    return all(ord(c) < 128 for c in text)
 
 # createTokenizedList abre el archivo actual de la carpeta "notags" y crea una lista de
 # las palabras del archivo y las tokeniza.
@@ -310,4 +334,4 @@ def createFile(fileName, fileContent, willTruncate):
 	txt.close()
 
 if __name__ == "__main__":
-  main()
+	main()
