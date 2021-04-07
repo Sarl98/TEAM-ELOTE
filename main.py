@@ -45,7 +45,7 @@ def main():
 	tmpClose = time.time()
 	totalTimeCount = "\n\n Tiempo total de ejecución del programa: " + str(round(tmpClose - tmpOpen, 4))
 
-	# Agrega el tiempo total de ejecución al archivo a7_matricula.txt.
+	# Agrega el tiempo total de ejecución al archivo a8_matricula.txt.
 	createFile("a8_matricula.txt", totalTimeCount, False)
 
 # createFileIfDontExist sirve para validar si el archivo existe en la carpeta "wordlists" 
@@ -161,7 +161,7 @@ def getTokenizedLists(allTokenizedWordsCountPerFile):
 		timeLogContent += file + "   " + str(round(tmpClose - tmpOpen, 4)) + "\n"
 
 	# Creamos el archivo que registra el tiempo.
-	createFile("a7_matricula.txt", timeLogContent, True)
+	# createFile("a7_matricula.txt", timeLogContent, True)
 			
 # createPostingFile se encarga de crear el archivo posting.
 #
@@ -231,9 +231,8 @@ def createDictionaryFile (allTokenizedWordsCountPerFile):
 
 # is_ascii sirve para corrobarar si una cadena o caracter puede ser encoded en ascii.
 #
-# Parametros:
-# -text = Cadena de texto a revisar.
-#
+# Parámetros:
+# - text = Cadena de texto a revisar.
 def is_ascii(text):
 	# Primero descomponemos la cadena de texto mediante un for.
 	# Despues usamos la funcion ord que regresa un integer representando el caracter Unicode para
