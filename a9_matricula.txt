@@ -1,0 +1,7 @@
+
+
+ Tiempo total de ejecución del programa: 34.663
+
+ Tiempo total de ejecución del programa: 33.7977
+
+ Tiempo total de ejecución del programa: 34.8198

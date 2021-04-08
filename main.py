@@ -6,7 +6,7 @@
 # Germán Marcelo Celestino Chávez 2866129
 # Saúl Antonio Rivera Luna 2729947
 
-# Actividad 8
+# Actividad 9
 
 import time
 import os
@@ -46,7 +46,7 @@ def main():
 	totalTimeCount = "\n\n Tiempo total de ejecución del programa: " + str(round(tmpClose - tmpOpen, 4))
 
 	# Agrega el tiempo total de ejecución al archivo a8_matricula.txt.
-	createFile("a8_matricula.txt", totalTimeCount, False)
+	createFile("a9_matricula.txt", totalTimeCount, False)
 
 # createFileIfDontExist sirve para validar si el archivo existe en la carpeta "wordlists" 
 # y crear los archivos necesarios si estos no existen. Toma el tiempo de creación de
@@ -104,57 +104,56 @@ def createFileIfDontExist(files):
 # - tmpOpen = Inicia el timer.
 # - tmpClose = Cierra el timer.
 # - timeLogContent = Mensaje del tiempo total del contador.
+# - stopList = Lista de palabras que no pueden incluirse.
 #
 # getTokenizedLists(dict[string: int])
 def getTokenizedLists(allTokenizedWordsCountPerFile):
 	sortedFiles = os.listdir("wordlists")
 	timeLogContent = ""
-
+	#Conseguimos lista de palabras del Stop List
+	stopList = getListOfWords("stop_list.html")
 	# Por cada archivo...
 	for file in sortedFiles:
 		# Abrimos el contador de tiempo.
 		tmpOpen = time.time()
-
-		# Abre el archivo.
-		openedFile = open('wordlists/' + file, 'r', encoding='windows-1252').read()
-		# Separa las palabras en el archivo.
-		listOfWords = re.split('\s+', openedFile)
+		listOfWords = getListOfWords("wordlists/"+file)
 		repeatedWords = []
 
 		# Por cada palabra en la lista myList...
 		for word in listOfWords:
-			# Si la palabra no está en la lista de palabras repetidas Y
-			# no está en el diccionario de allTokenizedWordsCountPerFile...
-			if (word not in repeatedWords) and (word not in allTokenizedWordsCountPerFile):
-				allTokenizedWordsCountPerFile[word] = {}
-				# Se añade la palabra al diccionario con un valor inicial de 1.
-				allTokenizedWordsCountPerFile[word]["count"] = 1
-				# Inicializamos el diccionario de files.
-				allTokenizedWordsCountPerFile[word]["files"] = {}
-				# Inicializamos el contador de la palabra en el archivo con un
-				# valor inicial de 1.
-				allTokenizedWordsCountPerFile[word]["files"][file] = 1
-
-				# Se añade la palabra a la lista de palabras repetidas.
-				repeatedWords.append(word)
-			# Si la palabra no está en la lista de palabras repetidas Y
-			# si está en el diccionario de allTokenizedWordsCountPerFile...
-			elif (word not in repeatedWords) and (word in allTokenizedWordsCountPerFile):
-				# Se le suma 1 a la cuenta.
-				allTokenizedWordsCountPerFile[word]["count"] += 1
-				# Se añade la palabra a la lista de palabras repetidas.
-				repeatedWords.append(word)
-			# Si la palabra se repite...
-			elif (word in repeatedWords):
-				# Si el archivo no está inicializado en el diccionario...
-				if file not in allTokenizedWordsCountPerFile[word]["files"]:
-					# Se inicializa con un valor inicial de 1.
+			#Si la palabra no se encuentra en la lista y la palabra es de mas de un caracter...
+			if(word not in stopList) and (len(word) > 1):
+				# Si la palabra no está en la lista de palabras repetidas Y
+				# no está en el diccionario de allTokenizedWordsCountPerFile...
+				if (word not in repeatedWords) and (word not in allTokenizedWordsCountPerFile):
+					allTokenizedWordsCountPerFile[word] = {}
+					# Se añade la palabra al diccionario con un valor inicial de 1.
+					allTokenizedWordsCountPerFile[word]["count"] = 1
+					# Inicializamos el diccionario de files.
+					allTokenizedWordsCountPerFile[word]["files"] = {}
+					# Inicializamos el contador de la palabra en el archivo con un
+					# valor inicial de 1.
 					allTokenizedWordsCountPerFile[word]["files"][file] = 1
-				# Si el archivo sí está inicializado en el diccionario...
-				else:
-					# Le sumamos uno a su contador de frecuencia.
-					allTokenizedWordsCountPerFile[word]["files"][file] += 1
 
+					# Se añade la palabra a la lista de palabras repetidas.
+					repeatedWords.append(word)
+				# Si la palabra no está en la lista de palabras repetidas Y
+				# si está en el diccionario de allTokenizedWordsCountPerFile...
+				elif (word not in repeatedWords) and (word in allTokenizedWordsCountPerFile):
+					# Se le suma 1 a la cuenta.
+					allTokenizedWordsCountPerFile[word]["count"] += 1
+					# Se añade la palabra a la lista de palabras repetidas.
+					repeatedWords.append(word)
+				# Si la palabra se repite...
+				elif (word in repeatedWords):
+					# Si el archivo no está inicializado en el diccionario...
+					if file not in allTokenizedWordsCountPerFile[word]["files"]:
+						# Se inicializa con un valor inicial de 1.
+						allTokenizedWordsCountPerFile[word]["files"][file] = 1
+					# Si el archivo sí está inicializado en el diccionario...
+					else:
+						# Le sumamos uno a su contador de frecuencia.
+						allTokenizedWordsCountPerFile[word]["files"][file] += 1
 		# Cerramos el contador de tiempo.
 		tmpClose = time.time()
 		# Concatenamos el mensaje de tiempo del archivo.
@@ -172,17 +171,27 @@ def getTokenizedLists(allTokenizedWordsCountPerFile):
 #
 # Variables locales:
 # - postingFileContent = String que forma el contenido del archivo posting.
-#
+# - wordsToRemove = Palabras que se borraran del diccionario por no cumplir con ciertos parametros...
 # createPostingFile(list[dict[])
 def createPostingFile (allTokenizedWordsCountPerFile):
 	postingFileContent = ""
-
+	wordsToRemove = []
 	# Por cada palabra dentro del diccionario allTokenizedWordsCountPerFile...
 	for word in allTokenizedWordsCountPerFile:
-		# Por cada fileName dentro de el diccionario de archivos de esa palabra...
-		for fileName in allTokenizedWordsCountPerFile[word]["files"]:
-			# Formamos el string y se lo concatenamos a postingFileContent...
-			postingFileContent += fileName + " | " + str(allTokenizedWordsCountPerFile[word]["files"][fileName]) + "\n"
+		#Si la cantidad de palabras es mayor a 2...
+		if(allTokenizedWordsCountPerFile[word]["count"] > 2):
+			# Por cada fileName dentro de el diccionario de archivos de esa palabra...
+			for fileName in allTokenizedWordsCountPerFile[word]["files"]:
+				# Formamos el string y se lo concatenamos a postingFileContent...
+				postingFileContent += fileName + " | " + str(allTokenizedWordsCountPerFile[word]["files"][fileName]) + "\n"
+		#Si la cantidad de palabras es menor a 2...
+		else:
+			#Agrega la palabra al listado de palabras que se eliminaran 
+			wordsToRemove.append(word)
+	#Por cada palabra dentro de wordsToRemove
+	for word in wordsToRemove:
+		#Saca la palabra del diccionario
+		allTokenizedWordsCountPerFile.pop(word)		
 
 	# Creamos el archivo de texto diccionario.txt.
 	createFile("posting.txt", postingFileContent, True)
@@ -205,9 +214,9 @@ def createDictionaryFile (allTokenizedWordsCountPerFile):
 	dictionaryFileContent = ""
 	postingIndex = 0
 	hashtable = {}
-
 	# Por cada palabra en el diccionario de allTokenizedWordsCountPerFile...
 	for word in allTokenizedWordsCountPerFile:
+
 		# Verificamos si la palabra puede ser codificada en codigo ascii para añadirla a
 		# la hashtable, si no lo es agregamos un 0 y -1.
 		if is_ascii(word):
@@ -332,5 +341,16 @@ def createFile(fileName, fileContent, willTruncate):
 	# Lo cierra y guarda.
 	txt.close()
 
+
+# getListOfWords es una funcion que regresa una lista de palabras de un archivo ordenado
+# Parámetros:
+# -file = Archivo ordenado
+# Variables locales:
+# - openedFile = Variable que almacena al archivo como string
+#   getListOfWords(String)
+def getListOfWords(file):
+	openedFile = open(file, 'r', encoding='windows-1252').read()
+	return re.split('\s+', openedFile)
+
 if __name__ == "__main__":
-	main()
+	main() 
