@@ -159,8 +159,8 @@ def getTokenizedLists(allTokenizedWordsCountPerFile):
 		# Concatenamos el mensaje de tiempo del archivo.
 		timeLogContent += file + "   " + str(round(tmpClose - tmpOpen, 4)) + "\n"
 
-	# Creamos el archivo que registra el tiempo.
-	# createFile("a7_matricula.txt", timeLogContent, True)
+	 # Creamos el archivo que registra el tiempo.
+	 createFile("a9_matricula.txt", timeLogContent, True)
 			
 # createPostingFile se encarga de crear el archivo posting.
 #
