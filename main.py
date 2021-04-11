@@ -43,9 +43,9 @@ def main():
 	createDictionaryFile(allTokenizedWordsCountPerFile)
 
 	tmpClose = time.time()
-	totalTimeCount = "\n\n Tiempo total de ejecución del programa: " + str(round(tmpClose - tmpOpen, 4))
+	totalTimeCount = "\n\n Tiempo total de ejecucion del programa: " + str(round(tmpClose - tmpOpen, 4))
 
-	# Agrega el tiempo total de ejecución al archivo a8_matricula.txt.
+	# Agrega el tiempo total de ejecución al archivo a9_matricula.txt.
 	createFile("a9_matricula.txt", totalTimeCount, False)
 
 # createFileIfDontExist sirve para validar si el archivo existe en la carpeta "wordlists" 
@@ -160,7 +160,7 @@ def getTokenizedLists(allTokenizedWordsCountPerFile):
 		timeLogContent += file + "   " + str(round(tmpClose - tmpOpen, 4)) + "\n"
 
 	# Creamos el archivo que registra el tiempo.
-	# createFile("a7_matricula.txt", timeLogContent, True)
+	createFile("a9_matricula.txt", timeLogContent, True)
 			
 # createPostingFile se encarga de crear el archivo posting.
 #
@@ -178,13 +178,13 @@ def createPostingFile (allTokenizedWordsCountPerFile):
 	wordsToRemove = []
 	# Por cada palabra dentro del diccionario allTokenizedWordsCountPerFile...
 	for word in allTokenizedWordsCountPerFile:
-		#Si la cantidad de palabras es mayor a 2...
+		#Si la frecuencia de palabras es mayor a 2...
 		if(allTokenizedWordsCountPerFile[word]["count"] > 2):
 			# Por cada fileName dentro de el diccionario de archivos de esa palabra...
 			for fileName in allTokenizedWordsCountPerFile[word]["files"]:
 				# Formamos el string y se lo concatenamos a postingFileContent...
 				postingFileContent += fileName + " | " + str(allTokenizedWordsCountPerFile[word]["files"][fileName]) + "\n"
-		#Si la cantidad de palabras es menor a 2...
+		#Si la frecuencia de palabras es menor a 2...
 		else:
 			#Agrega la palabra al listado de palabras que se eliminaran 
 			wordsToRemove.append(word)
@@ -193,7 +193,7 @@ def createPostingFile (allTokenizedWordsCountPerFile):
 		#Saca la palabra del diccionario
 		allTokenizedWordsCountPerFile.pop(word)		
 
-	# Creamos el archivo de texto diccionario.txt.
+	# Creamos el archivo de texto posting.txt.
 	createFile("posting.txt", postingFileContent, True)
 	
 # createDictionaryFile se encarga de crear el archivo diccionario.
