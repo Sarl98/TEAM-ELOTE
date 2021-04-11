@@ -45,8 +45,8 @@ def main():
 	tmpClose = time.time()
 	totalTimeCount = "\n\n Tiempo total de ejecucion del programa: " + str(round(tmpClose - tmpOpen, 4))
 
-	# Agrega el tiempo total de ejecución al archivo a9_matricula.txt.
-	createFile("a9_matricula.txt", totalTimeCount, False)
+	# Agrega el tiempo total de ejecución al archivo a10_matricula.txt.
+	createFile("a10_matricula.txt", totalTimeCount, False)
 
 # createFileIfDontExist sirve para validar si el archivo existe en la carpeta "wordlists" 
 # y crear los archivos necesarios si estos no existen. Toma el tiempo de creación de
@@ -160,7 +160,7 @@ def getTokenizedLists(allTokenizedWordsCountPerFile):
 		timeLogContent += file + "   " + str(round(tmpClose - tmpOpen, 4)) + "\n"
 
 	# Creamos el archivo que registra el tiempo.
-	createFile("a9_matricula.txt", timeLogContent, True)
+	createFile("a10_matricula.txt", timeLogContent, True)
 			
 # createPostingFile se encarga de crear el archivo posting.
 #
@@ -172,6 +172,7 @@ def getTokenizedLists(allTokenizedWordsCountPerFile):
 # Variables locales:
 # - postingFileContent = String que forma el contenido del archivo posting.
 # - wordsToRemove = Palabras que se borraran del diccionario por no cumplir con ciertos parametros...
+# - wordWeight = guarda el peso total de la palabra en el archivo actual
 # createPostingFile(list[dict[])
 def createPostingFile (allTokenizedWordsCountPerFile):
 	postingFileContent = ""
@@ -182,8 +183,10 @@ def createPostingFile (allTokenizedWordsCountPerFile):
 		if(allTokenizedWordsCountPerFile[word]["count"] > 2):
 			# Por cada fileName dentro de el diccionario de archivos de esa palabra...
 			for fileName in allTokenizedWordsCountPerFile[word]["files"]:
+				wordWeight = 0
+				wordWeight = weight(allTokenizedWordsCountPerFile, word, fileName)
 				# Formamos el string y se lo concatenamos a postingFileContent...
-				postingFileContent += fileName + " | " + str(allTokenizedWordsCountPerFile[word]["files"][fileName]) + "\n"
+				postingFileContent += fileName + " | " + str(wordWeight) + "\n"
 		#Si la frecuencia de palabras es menor a 2...
 		else:
 			#Agrega la palabra al listado de palabras que se eliminaran 
@@ -352,5 +355,31 @@ def getListOfWords(file):
 	openedFile = open(file, 'r', encoding='windows-1252').read()
 	return re.split('\s+', openedFile)
 
+# weight devuelve el peso final de la palabra tomando en cuenta la cantidad de tokens que hay en el documento actual y las
+# veces que se repite en este
+#
+# params:
+# - allTokenizedWordsCountPerFile = diccionario  de palabras
+# - word = palabra actual de la cual se va a devolver el peso
+# - filename = archivo actual
+# 
+# variables locales:
+# - weight = peso final de la palabra en el documento
+# - listOfWords = lista de todas las palabras en el documento
+# - filteredTokenlist = lista de todas las palabras en el documento quitando las palabras repetidas
+# - listLen = longitud de la lista "filteredTokenlist"
+# 
+# returns:
+# - weight = peso final de la palabra en el documento
+#
+# weight(list[dict[], String, String)
+def weight(allTokenizedWordsCountPerFile, word, filename):
+  weight = 0
+  listOfWords = getListOfWords("wordlists/" + filename)
+  filteredTokenlist = list(dict.fromkeys(listOfWords))
+  listLen = len(filteredTokenlist)
+  weight = round(allTokenizedWordsCountPerFile[word]['files'][filename] * 100 / listLen, 4)
+
+  return weight
 if __name__ == "__main__":
 	main() 
