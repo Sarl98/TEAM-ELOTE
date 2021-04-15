@@ -9,6 +9,7 @@
 # Actividad 9
 
 import time
+import sys
 import os
 import re
 from typing import Dict
@@ -158,7 +159,8 @@ def getTokenizedLists(allTokenizedWordsCountPerFile):
 		tmpClose = time.time()
 		# Concatenamos el mensaje de tiempo del archivo.
 		timeLogContent += file + "   " + str(round(tmpClose - tmpOpen, 4)) + "\n"
-
+	# Se crea un archivo con las palabras tokenizadas (Facilita el uso de los comandos en commands.py)
+	createFile("tokenizedWords.txt", str(allTokenizedWordsCountPerFile), True)	
 	# Creamos el archivo que registra el tiempo.
 	createFile("a10_matricula.txt", timeLogContent, True)
 			
