@@ -6,21 +6,25 @@
 # Germán Marcelo Celestino Chávez 2866129
 # Saúl Antonio Rivera Luna 2729947
 
-# Actividad 9
+# Actividad 11
 
 import time
-import sys
 import os
 import re
-from typing import Dict
+import random
 import nltk
+from pathlib import Path
+from typing import Dict
 from nltk import word_tokenize
 
 # Empieza y ejecuta el programa.
 #
 # Variables locales: 
 # - files = abre los archivos que se utilizarán.
+# - mainfolderLocation = ruta absoluta de la carpeta de trabajo
+# - notagsfileLocation = ruta a la carpeta de notags
 # - allTokenizedWordsCountPerFile = Diccionario que contendrá las palabras, incluyendo la cantidad
+# - documentsIDPerFile = Diccionario que contendrá los ID unicos de los archivos junto con su nombre y path
 # 	de archivos en las que esta palabra aparece. También contendrá cuáles son los archivos en los 
 # 	que aparece y la frecuencia en las que aparece en ese archivo.
 # - tmpOpen = Inicia el timer.
@@ -29,25 +33,28 @@ from nltk import word_tokenize
 #
 # main()
 def main():
+	mainfolderLocation = Path(__file__).absolute().parent
+	notagsfileLocation = str(mainfolderLocation) + '/notags'
 	# Abre la carpeta "notags" y devuelve nombre de todos los archivos que contiene.
-	files = os.listdir("notags")
+	files = os.listdir(notagsfileLocation)
 	allTokenizedWordsCountPerFile = {}
+	documentsIDPerFile = {}
 	tmpOpen = time.time()
 
 	# Si no existen los archivos de palabras tokenizadas en la carpeta "wordlists" los crea.
 	createFileIfDontExist(files)
 	# Genera el diccionario de las palabras tokenizadas.
-	getTokenizedLists(allTokenizedWordsCountPerFile)
+	getTokenizedLists(allTokenizedWordsCountPerFile, documentsIDPerFile)
 	# Crea el documento de posting.txt.
-	createPostingFile(allTokenizedWordsCountPerFile)
+	createPostingFile(allTokenizedWordsCountPerFile, documentsIDPerFile)
 	# Crea el documento de diccionario.txt.
 	createDictionaryFile(allTokenizedWordsCountPerFile)
 
 	tmpClose = time.time()
 	totalTimeCount = "\n\n Tiempo total de ejecucion del programa: " + str(round(tmpClose - tmpOpen, 4))
 
-	# Agrega el tiempo total de ejecución al archivo a10_matricula.txt.
-	createFile("a10_matricula.txt", totalTimeCount, False)
+	# Agrega el tiempo total de ejecución al archivo a11_matricula.txt.
+	createFile("a11_matricula.txt", totalTimeCount, False)
 
 # createFileIfDontExist sirve para validar si el archivo existe en la carpeta "wordlists" 
 # y crear los archivos necesarios si estos no existen. Toma el tiempo de creación de
@@ -100,23 +107,29 @@ def createFileIfDontExist(files):
 # - sortedFiles = Lista de todos los archivos en la carpeta "wordlists".
 # - openedFile = Abre y lee el archivo actual.
 # - listOfWords = Lista que contiene las palabras tokenizadas del archivo.
+# - documentsID =  Diccionario que va a añadir el ID unico por archivo con su path
+# - documentID = ID random a asignar a un documento
 # - repeatedWords = Lista de las palabras que ya aparecieron en el archivo actual.
 # - timeLogContent = String que contiene los logs de tiempo de cada archivo.
+# - diccionarioIDContent = String que contiene los ID y su path
 # - tmpOpen = Inicia el timer.
 # - tmpClose = Cierra el timer.
 # - timeLogContent = Mensaje del tiempo total del contador.
 # - stopList = Lista de palabras que no pueden incluirse.
 #
 # getTokenizedLists(dict[string: int])
-def getTokenizedLists(allTokenizedWordsCountPerFile):
+def getTokenizedLists(allTokenizedWordsCountPerFile, documentsIDPerFile):
 	sortedFiles = os.listdir("wordlists")
 	timeLogContent = ""
+	diccionarioIDContent = ""
+	documentID = random.sample(range(1000), 505)
 	#Conseguimos lista de palabras del Stop List
 	stopList = getListOfWords("stop_list.html")
 	# Por cada archivo...
 	for file in sortedFiles:
 		# Abrimos el contador de tiempo.
 		tmpOpen = time.time()
+		documentsID = documentIdQuery(documentsIDPerFile, file, documentID)
 		listOfWords = getListOfWords("wordlists/"+file)
 		repeatedWords = []
 
@@ -159,11 +172,12 @@ def getTokenizedLists(allTokenizedWordsCountPerFile):
 		tmpClose = time.time()
 		# Concatenamos el mensaje de tiempo del archivo.
 		timeLogContent += file + "   " + str(round(tmpClose - tmpOpen, 4)) + "\n"
-	# Se crea un archivo con las palabras tokenizadas (Facilita el uso de los comandos en commands.py)
-	createFile("tokenizedWords.txt", str(allTokenizedWordsCountPerFile), True)	
+		diccionarioIDContent += str(documentsIDPerFile[file]['id']) + "..........................." + documentsIDPerFile[file]['nombrePath'] + "\n"
 	# Creamos el archivo que registra el tiempo.
-	createFile("a10_matricula.txt", timeLogContent, True)
-			
+	createFile("a11_matricula.txt", timeLogContent, True)
+	# Creamos el archivo que registra el archivo documentos(id, nombre y path).
+	createFile("documents.txt", diccionarioIDContent, True)
+	
 # createPostingFile se encarga de crear el archivo posting.
 #
 # Parámetros:
@@ -176,7 +190,7 @@ def getTokenizedLists(allTokenizedWordsCountPerFile):
 # - wordsToRemove = Palabras que se borraran del diccionario por no cumplir con ciertos parametros...
 # - wordWeight = guarda el peso total de la palabra en el archivo actual
 # createPostingFile(list[dict[])
-def createPostingFile (allTokenizedWordsCountPerFile):
+def createPostingFile (allTokenizedWordsCountPerFile, documentsIDPerFile):
 	postingFileContent = ""
 	wordsToRemove = []
 	# Por cada palabra dentro del diccionario allTokenizedWordsCountPerFile...
@@ -188,7 +202,7 @@ def createPostingFile (allTokenizedWordsCountPerFile):
 				wordWeight = 0
 				wordWeight = weight(allTokenizedWordsCountPerFile, word, fileName)
 				# Formamos el string y se lo concatenamos a postingFileContent...
-				postingFileContent += fileName + " | " + str(wordWeight) + "\n"
+				postingFileContent += str(documentsIDPerFile[fileName]["id"]) + " | " + str(wordWeight) + "\n"
 		#Si la frecuencia de palabras es menor a 2...
 		else:
 			#Agrega la palabra al listado de palabras que se eliminaran 
@@ -383,5 +397,17 @@ def weight(allTokenizedWordsCountPerFile, word, filename):
   weight = round(allTokenizedWordsCountPerFile[word]['files'][filename] * 100 / listLen, 4)
 
   return weight
+
+# documentIdQuery llena el diccionario de documentsIDPerFile, le asigna un numero random como id y le da la ruta & nombre del archivo
+# params:
+# - documentsIDPerFile = diccionario vacio a llenar con los campos de "id" y "nombrePath"
+# - file = archivo actual por el que el for esta pasando, la iteracion de todos los archivos se grabara en este diccionario
+# variables locales:
+def documentIdQuery(documentsIDPerFile, file, documentID):
+	documentsIDPerFile[file] = {}
+	documentsIDPerFile[file]['id'] = random.choice(documentID)
+	documentsIDPerFile[file]['nombrePath'] = file
+	documentID.remove(documentsIDPerFile[file]['id'])
+
 if __name__ == "__main__":
 	main() 
