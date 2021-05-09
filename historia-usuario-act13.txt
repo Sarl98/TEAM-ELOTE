@@ -1,0 +1,5 @@
+El cliente quiere que se genere una búsqueda de varias palabras en los archivos para saber en qué archivo existen coincidencias.
+
+El Cliente quiere que no se almacene ram en las búsquedas para hacer más eficiente el proceso.
+
+El desarrollador debe de modificar el comando existente de la actividad anterior para que se cumplan los requerimientos del cliente.
