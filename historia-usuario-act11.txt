@@ -1,0 +1,8 @@
+El cliente quiere que se genere un tercer archivo que relacione eñ nombre 
+del documento con un identificador unico.
+
+El Cliente quieres que cada id con su documento sea almacenado de la misma
+manera que en el archivo posting
+
+El desarrollador debe de modificar el documento posing que incluya el
+documento id y el peso de cada tooken.

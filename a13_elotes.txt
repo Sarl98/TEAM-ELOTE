@@ -1,0 +1,50 @@
+
+# Resultados para ['Gauch']
+No se encontro en ningun archivo
+# Resultados para ['Elephants']
+No se encontro en ningun archivo
+# Resultados para ['csce']
+Coincidencias encontradas en el archivo: ['notags_medium.html']
+
+# Resultados para ['Arkansas']
+No se encontro en ningun archivo
+# Resultados para ['gift']
+Coincidencias encontradas en el archivo: ['notags_026.html']
+Coincidencias encontradas en el archivo: ['notags_043.html']
+Coincidencias encontradas en el archivo: ['notags_051.html']
+Coincidencias encontradas en el archivo: ['notags_074.html']
+Coincidencias encontradas en el archivo: ['notags_098.html']
+Coincidencias encontradas en el archivo: ['notags_149.html']
+Coincidencias encontradas en el archivo: ['notags_165.html']
+Coincidencias encontradas en el archivo: ['notags_180.html']
+Coincidencias encontradas en el archivo: ['notags_240.html']
+Coincidencias encontradas en el archivo: ['notags_249.html']
+Coincidencias encontradas en el archivo: ['notags_250.html']
+
+# Resultados para ['abcdef']
+No se encontro en ningun archivo
+# Resultados para ['20']
+Coincidencias encontradas en el archivo: ['notags_002.html']
+Coincidencias encontradas en el archivo: ['notags_003.html']
+Coincidencias encontradas en el archivo: ['notags_005.html']
+Coincidencias encontradas en el archivo: ['notags_007.html']
+Coincidencias encontradas en el archivo: ['notags_009.html']
+Coincidencias encontradas en el archivo: ['notags_019.html']
+Coincidencias encontradas en el archivo: ['notags_023.html']
+Coincidencias encontradas en el archivo: ['notags_025.html']
+Coincidencias encontradas en el archivo: ['notags_027.html']
+Coincidencias encontradas en el archivo: ['notags_028.html']
+Coincidencias encontradas en el archivo: ['notags_030.html']
+
+# Resultados para ['20.07']
+Coincidencias encontradas en el archivo: ['notags_medium.html']
+
+# Resultados para ['123-456-7890']
+Coincidencias encontradas en el archivo: ['notags_medium.html']
+
+# Resultados para ['lawyer consumers']
+No se encontro en ningun archivo
+# Resultados para ['garden computer']
+No se encontro en ningun archivo
+# Resultados para ['United States laws']
+No se encontro en ningun archivo

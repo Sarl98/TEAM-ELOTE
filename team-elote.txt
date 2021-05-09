@@ -1,2 +1,0 @@
-Tiempo total en crear el nuevo archivo consolidado: 7.057
-Tiempo de ejecucion total: 8.7311
