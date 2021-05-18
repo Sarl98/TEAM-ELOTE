@@ -32,15 +32,32 @@ def commands():
 
 def run(args):
     
-    if(args.search):
+    userSearch = []
+    search = input("Escribe tu palabra.")
+    
+    # Separa las palabras en el archivo.
+    listOfWords = re.split('\s+', search)
+	# Se crea una lista con las palabras separadas.
+    userSearch = list(dict.fromkeys(listOfWords))
+    print(search)
+
+    if(userSearch):
         fileTimeOpen = time.time()
         foundOne = False
         limit = 10
         n = 0
 
         # Forma el string del log.
-        logText = "\n# Resultados para " + str(args.search) + "\n"
+        logText = "\n# Resultados para " + str(userSearch) + "\n"
         print(logText)
+
+        evidenciaFile = open("evidencia.txt", "r").read()
+         # Separa las palabras en el archivo.
+        listOfTokenizedSplits = re.split(' ---', evidenciaFile)
+        # Se crea una lista con las palabras separadas.
+        listOfTokenizedWordsWithWeights = list(dict.fromkeys(listOfTokenizedSplits))
+
+        holderList = {}
 
         # Por cada archivo en el directorio wordlists.
         for file in os.listdir("wordlists"):
@@ -56,12 +73,27 @@ def run(args):
 
             # Si todas las palabras de la búsqueda están dentro del archivo
             # devuelve verdadero, sino falso.
-            allIn = all(arg in dictonary for arg in args.search)
+            allIn = all(arg in dictonary for arg in userSearch)
 
             # Si sí las contiene todas...
             if (allIn):
                 # Marca que sí encontró una coincidencia.
                 foundOne = True
+
+                for word in userSearch:
+                    for evidenciaRow in listOfTokenizedWordsWithWeights:
+                        if (word in evidenciaRow):
+                            index = re.findall('notags\_\d.*\.html', evidenciaRow)[0]
+                            if (index in holderList):                        
+                                holderList[index] += float(re.sub(r'[\s\S].* \| ', '', evidenciaRow))
+                            else:
+                                holderList[index] = float(re.sub(r'[\s\S].* \| ', '', evidenciaRow))
+                    
+                resultsList = []
+                for holderVal in holderList:
+                    resultsList.append(holderList[holderVal])
+
+                resultsList.sort(reverse=True)
 
                 # Concatena el mensaje del texto al log.
                 coincidenceLogText = "Coincidencias encontradas en el archivo: ['" + file + "']\n"

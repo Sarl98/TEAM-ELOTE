@@ -202,7 +202,7 @@ def createPostingFile (allTokenizedWordsCountPerFile, documentsIDPerFile):
 				wordWeight = 0
 				wordWeight = weight(allTokenizedWordsCountPerFile, word, fileName)
 				# Formamos el string y se lo concatenamos a postingFileContent...
-				postingFileContent += str(documentsIDPerFile[fileName]["id"]) + " | " + str(wordWeight) + "\n"
+				postingFileContent += str(documentsIDPerFile[fileName]["id"]) + " | " + fileName + " | " + word + " | " + str(wordWeight) + " ---\n"
 		#Si la frecuencia de palabras es menor a 2...
 		else:
 			#Agrega la palabra al listado de palabras que se eliminaran 
@@ -214,6 +214,7 @@ def createPostingFile (allTokenizedWordsCountPerFile, documentsIDPerFile):
 
 	# Creamos el archivo de texto posting.txt.
 	createFile("posting.txt", postingFileContent, True)
+	createFile("evidencia.txt", postingFileContent, True)
 	
 # createDictionaryFile se encarga de crear el archivo diccionario.
 #

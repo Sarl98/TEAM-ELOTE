@@ -48,3 +48,64 @@ No se encontro en ningun archivo
 No se encontro en ningun archivo
 # Resultados para ['United States laws']
 No se encontro en ningun archivo
+# Resultados para ['hola']
+Coincidencias encontradas en el archivo: ['notags_041.html']
+Coincidencias encontradas en el archivo: ['notags_043.html']
+Coincidencias encontradas en el archivo: ['notags_065.html']
+Coincidencias encontradas en el archivo: ['notags_073.html']
+Coincidencias encontradas en el archivo: ['notags_081.html']
+Coincidencias encontradas en el archivo: ['notags_097.html']
+Coincidencias encontradas en el archivo: ['notags_118.html']
+Coincidencias encontradas en el archivo: ['notags_132.html']
+Coincidencias encontradas en el archivo: ['notags_152.html']
+Coincidencias encontradas en el archivo: ['notags_192.html']
+Coincidencias encontradas en el archivo: ['notags_199.html']
+
+# Resultados para Pito
+No se encontro en ningun archivo
+# Resultados para Hola
+No se encontro en ningun archivo
+# Resultados para ['hola', 'como', 'estas']
+No se encontro en ningun archivo
+# Resultados para ['Hola', 'como', 'estás']
+No se encontro en ningun archivo
+# Resultados para ['Hola']
+No se encontro en ningun archivo
+# Resultados para ['hola']
+Coincidencias encontradas en el archivo: ['notags_041.html']
+Coincidencias encontradas en el archivo: ['notags_043.html']
+Coincidencias encontradas en el archivo: ['notags_065.html']
+Coincidencias encontradas en el archivo: ['notags_073.html']
+Coincidencias encontradas en el archivo: ['notags_081.html']
+Coincidencias encontradas en el archivo: ['notags_097.html']
+Coincidencias encontradas en el archivo: ['notags_118.html']
+Coincidencias encontradas en el archivo: ['notags_132.html']
+Coincidencias encontradas en el archivo: ['notags_152.html']
+Coincidencias encontradas en el archivo: ['notags_192.html']
+Coincidencias encontradas en el archivo: ['notags_199.html']
+
+# Resultados para ['hola']
+Coincidencias encontradas en el archivo: ['notags_041.html']
+Coincidencias encontradas en el archivo: ['notags_043.html']
+Coincidencias encontradas en el archivo: ['notags_065.html']
+Coincidencias encontradas en el archivo: ['notags_073.html']
+Coincidencias encontradas en el archivo: ['notags_081.html']
+Coincidencias encontradas en el archivo: ['notags_097.html']
+Coincidencias encontradas en el archivo: ['notags_118.html']
+Coincidencias encontradas en el archivo: ['notags_132.html']
+Coincidencias encontradas en el archivo: ['notags_152.html']
+Coincidencias encontradas en el archivo: ['notags_192.html']
+Coincidencias encontradas en el archivo: ['notags_199.html']
+
+# Resultados para ['hola']
+Coincidencias encontradas en el archivo: ['notags_041.html']
+Coincidencias encontradas en el archivo: ['notags_043.html']
+Coincidencias encontradas en el archivo: ['notags_065.html']
+Coincidencias encontradas en el archivo: ['notags_073.html']
+Coincidencias encontradas en el archivo: ['notags_081.html']
+Coincidencias encontradas en el archivo: ['notags_097.html']
+Coincidencias encontradas en el archivo: ['notags_118.html']
+Coincidencias encontradas en el archivo: ['notags_132.html']
+Coincidencias encontradas en el archivo: ['notags_152.html']
+Coincidencias encontradas en el archivo: ['notags_192.html']
+Coincidencias encontradas en el archivo: ['notags_199.html']
