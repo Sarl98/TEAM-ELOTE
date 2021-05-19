@@ -2,38 +2,35 @@ import argparse
 import nltk
 import ast
 import os
+from flask import Flask, render_template
+from flask import request
 from main import *
+app = Flask(__name__)
 
-# commands genera los comandos y lee los argumentos
-#
-# Variables locales:
-# - parser = Funcion de argparser para generar comandos
-# - args = Argumentos que pueden ser leidos en la linea de comandos.
-#
-# commands()
-def commands():
-    parser=argparse.ArgumentParser(description="Tokenizar o indexar")
-    parser.add_argument("-tok",help="tokenizar",dest="tok",action='store_false',required=False)
-    parser.add_argument("-ind",help="indexar",dest="ind",action='store_false',required=False)
-    parser.add_argument('-search',action="extend", metavar='name', type=str, nargs='+',
-                    help='busca archivos con esta palabra',required=False)
-    parser.set_defaults(func=run)
-    args=parser.parse_args()
-    args.func(args)
+@app.route('/')
+def index():
+  return render_template('index.html')
 
-# run manda a llamar funciones de main.py dependiendo del argumento que pongas
-# En caso de no conocer los comandos usa -h
-#
-# Variables locales:
-# - allTokenizedWordsCountPerFile = Palabras tokenizadas (Las consigue de main.py)
-# - args = Argumentos que pueden ser leidos en la linea de comandos.
-#
-# run(argumentos)
+@app.route('/my-link/', methods=['POST'])
+def my_link():
+  projectpath = request.form['projectFilepath']
+  hl = main(projectpath)
+  '<a href = "'
 
-def run(args):
+  myString = "Resultados de la busqueda de " + projectpath + ":" +"<br/>"
+
+  for el in hl:
+    dictionaryFile = open("wordlists/" + str(el), "r")
+    myUrl = '"' + os.path.realpath(dictionaryFile.name) + '"' 
+
+    myString += "<a href = "+ myUrl + ">" + el + "</a>" + " " + str(hl[el]) +"<br/>"
+
+  return myString
+
+def main(projectpath):
     
     userSearch = []
-    search = input("Escribe tu palabra.")
+    search = projectpath
     
     # Separa las palabras en el archivo.
     listOfWords = re.split('\s+', search)
@@ -50,8 +47,9 @@ def run(args):
         # Forma el string del log.
         logText = "\n# Resultados para " + str(userSearch) + "\n"
         print(logText)
-
-        evidenciaFile = open("evidencia.txt", "r").read()
+        mainfolderLocation = Path(__file__).absolute().parent
+        evidenciaFileLocation = str(mainfolderLocation) + '/evidencia.txt'
+        evidenciaFile = open(evidenciaFileLocation, "r").read()
          # Separa las palabras en el archivo.
         listOfTokenizedSplits = re.split(' ---', evidenciaFile)
         # Se crea una lista con las palabras separadas.
@@ -59,86 +57,29 @@ def run(args):
 
         holderList = {}
 
-        # Por cada archivo en el directorio wordlists.
-        for file in os.listdir("wordlists"):
-            # Si supera el limit...
-            if (n > limit):
-                # Sale del bucle.
-                break;
+        for word in userSearch:
+            for evidenciaRow in listOfTokenizedWordsWithWeights:
+                if (word in evidenciaRow):
+                    index = re.findall('notags\_\d.*\.html', evidenciaRow)[0]
+                    if (index in holderList):                        
+                        holderList[index] += float(re.sub(r'[\s\S].* \| ', '', evidenciaRow))
+                    else:
+                        holderList[index] = float(re.sub(r'[\s\S].* \| ', '', evidenciaRow))
+            
+        # resultsList = []
+        # for holderVal in holderList:
+        #     resultsList.append(holderList[holderVal])
 
-            # Abre el archivo del wordlists actual.
-            dictionaryFile = open("wordlists/" + str(file), "r")
-            # Extrae la lista de palabras del archivo.
-            dictonary = dictionaryFile.read()
-
-            # Si todas las palabras de la búsqueda están dentro del archivo
-            # devuelve verdadero, sino falso.
-            allIn = all(arg in dictonary for arg in userSearch)
-
-            # Si sí las contiene todas...
-            if (allIn):
-                # Marca que sí encontró una coincidencia.
-                foundOne = True
-
-                for word in userSearch:
-                    for evidenciaRow in listOfTokenizedWordsWithWeights:
-                        if (word in evidenciaRow):
-                            index = re.findall('notags\_\d.*\.html', evidenciaRow)[0]
-                            if (index in holderList):                        
-                                holderList[index] += float(re.sub(r'[\s\S].* \| ', '', evidenciaRow))
-                            else:
-                                holderList[index] = float(re.sub(r'[\s\S].* \| ', '', evidenciaRow))
-                    
-                resultsList = []
-                for holderVal in holderList:
-                    resultsList.append(holderList[holderVal])
-
-                resultsList.sort(reverse=True)
-
-                # Concatena el mensaje del texto al log.
-                coincidenceLogText = "Coincidencias encontradas en el archivo: ['" + file + "']\n"
-                logText += coincidenceLogText
-
-                # Imprime el mensaje.
-                print(coincidenceLogText)
-                # Aumenta el contador de palabras
-                n += 1            
-
-            # Se limpia el buffer en memoria del archivo actual.
-            dictionaryFile.flush()
-            # Se cierra el archivo.
-            dictionaryFile.close()
-
+        # resultsList.sort(reverse=True)
+          
+        for holder in holderList:
+          # dictionaryFile = open("wordlists/" + str(file), "r")
+          print(holder + " " + str(holderList[holder]))
         fileTimeClose = time.time()
         timeCountString = ("Se tardo en encontrar: " + str(round(fileTimeClose - fileTimeOpen, 4)) + " segundos\n")
         print(timeCountString)  
-        if(not foundOne):
-            # Concatena el mensaje del texto al log.
-            coincidenceLogText = "No se encontro en ningun archivo"
-            logText += coincidenceLogText
 
-            print(coincidenceLogText)
-            timeCountString = timeCountString + "no se encontro ningun archivo con el token brindado"
-          
-        # Crea los archivos de logs.
-        createFile("tiempos-de-busqueda-wordlists.txt", timeCountString, True)
-        createFile("a13_elotes.txt", logText, False)
-
-    if(args.tok == False):
-        print("Creando Tokens")
-        allTokenizedWordsCountPerFile = {}
-        getTokenizedLists(allTokenizedWordsCountPerFile)
-        print("Archivo tokenizado creado con exito!")
-        
-    if(args.ind == False):    
-        try:
-            print("Creando Indice (El proceso toma un tiempo)")
-            allTokenizedWordsCountPerFile = open("tokenizedWords.txt", "r").read()
-            allTokenizedWordsCountPerFile = ast.literal_eval(allTokenizedWordsCountPerFile)
-            createPostingFile(allTokenizedWordsCountPerFile)
-            print("Se indexo con exito!")
-        except IOError:
-            print("No hay palabras tokenizadas, prueba correr el comando -tok")
+        return holderList
         
 if __name__ =="__main__":
-    commands()    
+    app.run(debug=True)
