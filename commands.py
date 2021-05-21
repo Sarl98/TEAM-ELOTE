@@ -23,7 +23,7 @@ def my_link():
     dictionaryFile = open("wordlists/" + str(el), "r")
     myUrl = '"' + os.path.realpath(dictionaryFile.name) + '"' 
 
-    myString += "<a href = "+ myUrl + ">" + el + "</a>" + " " + str(hl[el]) +"<br/>"
+    myString += "<a href = "+ myUrl +  "target=" + "_blank" + ">" + el + "</a>" + " " + str(hl[el]) +"<br/>"
 
   return myString
 
@@ -78,6 +78,8 @@ def main(projectpath):
         fileTimeClose = time.time()
         timeCountString = ("Se tardo en encontrar: " + str(round(fileTimeClose - fileTimeOpen, 4)) + " segundos\n")
         print(timeCountString)  
+
+        dict(sorted(holderList.items(), key=lambda item: item[1]))
 
         return holderList
         
